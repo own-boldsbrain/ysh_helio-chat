@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Cube, Lightning, SunHorizon, ArrowsClockwise } from "@phosphor-icons/react"
 import { motion } from "framer-motion"
+import { MAP_COLORS, SOLAR_COLORS } from "@/lib/solar-colors"
 
 interface RooftopVisualization3DProps {
   systemSize?: number
@@ -124,9 +125,9 @@ export function RooftopVisualization3D({
                 'interpolate',
                 ['linear'],
                 ['get', 'panel'],
-                1, '#FFD60A',
-                panelCount / 2, '#FF3D3D',
-                panelCount, '#FF0066'
+                1, MAP_COLORS.polygon,
+                panelCount / 2, MAP_COLORS.horizonStroke,
+                panelCount, SOLAR_COLORS.pink
               ],
               'fill-extrusion-height': 6.3,
               'fill-extrusion-base': 6,
@@ -134,7 +135,7 @@ export function RooftopVisualization3D({
             }
           })
 
-          new window.maplibregl.Marker({ color: '#FFD60A' })
+          new window.maplibregl.Marker({ color: MAP_COLORS.polygon })
             .setLngLat([location.lng, location.lat])
             .addTo(map)
 
@@ -231,7 +232,7 @@ export function RooftopVisualization3D({
 
         <div className="px-6 pb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
           <motion.div 
-            className="p-4 bg-gradient-to-br from-[#FFD60A]/10 to-[#FF8800]/10 rounded-lg border border-[#FFD60A]/20"
+            className="p-4 bg-gradient-to-br from-[hsl(var(--solar-yellow))]/10 to-[hsl(var(--solar-orange))]/10 rounded-lg border border-[hsl(var(--solar-yellow))]/20"
             whileHover={{ scale: 1.02 }}
           >
             <p className="text-xs text-muted-foreground mb-1">Área Ocupada</p>
@@ -239,7 +240,7 @@ export function RooftopVisualization3D({
           </motion.div>
           
           <motion.div 
-            className="p-4 bg-gradient-to-br from-[#FF3D3D]/10 to-[#FF0066]/10 rounded-lg border border-[#FF3D3D]/20"
+            className="p-4 bg-gradient-to-br from-[hsl(var(--solar-red))]/10 to-[hsl(var(--solar-pink))]/10 rounded-lg border border-[hsl(var(--solar-red))]/20"
             whileHover={{ scale: 1.02 }}
           >
             <p className="text-xs text-muted-foreground mb-1">Produção Anual</p>

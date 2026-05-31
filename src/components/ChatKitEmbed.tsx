@@ -141,7 +141,7 @@ export function ChatKitEmbed({
         <Button
           size="lg"
           onClick={() => setIsOpen(true)}
-          className="h-16 w-16 rounded-full shadow-2xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90"
+          className="h-16 w-16 rounded-full shadow-2xl bg-gradient-solar-br hover:opacity-90"
         >
           <Sparkle size={28} weight="fill" className="text-white" />
         </Button>
@@ -168,7 +168,7 @@ export function ChatKitEmbed({
             {/* Header */}
             <div className="bg-gradient-to-br from-muted/50 to-muted/20 p-4 border-b border-border/40 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] flex items-center justify-center shadow-lg">
+                <div className="w-10 h-10 rounded-xl bg-gradient-solar-br flex items-center justify-center shadow-lg">
                   <Lightning className="text-white" size={20} weight="fill" />
                 </div>
                 <div>

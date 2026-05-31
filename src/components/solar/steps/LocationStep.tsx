@@ -81,7 +81,7 @@ export function LocationStep({ data, onNext }: LocationStepProps) {
         </p>
       </div>
 
-      <Card className="p-6 bg-gradient-to-br from-[#FFD60A]/5 to-[#FF3D3D]/5 border-2 border-[#FFD60A]/20">
+      <Card className="p-6 bg-gradient-to-br from-[hsl(var(--solar-yellow))]/5 to-[hsl(var(--solar-red))]/5 border-2 border-[hsl(var(--solar-yellow))]/20">
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="cep" className="text-base font-semibold">
@@ -105,7 +105,7 @@ export function LocationStep({ data, onNext }: LocationStepProps) {
               <Button
                 onClick={handleSubmit}
                 disabled={cep.replace(/\D/g, "").length !== 8 || isLoading}
-                className="h-12 px-6 bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D] hover:opacity-90"
+                className="h-12 px-6 bg-gradient-solar-r hover:opacity-90"
               >
                 {isLoading ? (
                   <>
@@ -128,7 +128,7 @@ export function LocationStep({ data, onNext }: LocationStepProps) {
           {data.location && (
             <div className="pt-4 border-t border-border/40">
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#FFD60A] to-[#FF8800] flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[hsl(var(--solar-yellow))] to-[hsl(var(--solar-orange))] flex items-center justify-center flex-shrink-0">
                   <Sun size={20} weight="fill" className="text-white" />
                 </div>
                 <div className="flex-1 min-w-0">

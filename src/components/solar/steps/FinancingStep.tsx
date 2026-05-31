@@ -285,7 +285,7 @@ export function FinancingStep({ data, onNext, onBack }: FinancingStepProps) {
         </Button>
         <Button
           onClick={handleSubmit}
-          className="flex-1 h-12 bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D] hover:opacity-90"
+          className="flex-1 h-12 bg-gradient-solar-r hover:opacity-90"
         >
           <span>Continuar</span>
           <ArrowRight size={20} className="ml-2" weight="bold" />

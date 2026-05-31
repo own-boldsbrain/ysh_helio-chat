@@ -51,12 +51,12 @@ export const SolarEnergyChart: React.FC<EnergyChartProps> = ({
               <div key={index} className="flex-1 flex flex-col items-center gap-2">
                 <div className="w-full flex gap-1 items-end" style={{ height: height }}>
                   <div 
-                    className="flex-1 bg-gradient-to-t from-[#FFD60A] to-[#FF9F1C] rounded-t transition-all duration-500"
+                    className="flex-1 bg-gradient-to-t from-[hsl(var(--solar-yellow))] to-[hsl(var(--solar-orange))] rounded-t transition-all duration-500"
                     style={{ height: `${productionHeight}%` }}
                     title={`Production: ${point.production} ${unit}`}
                   />
                   <div 
-                    className="flex-1 bg-gradient-to-t from-[#FF3D3D] to-[#FF0066] rounded-t transition-all duration-500"
+                    className="flex-1 bg-gradient-to-t from-[hsl(var(--solar-red))] to-[hsl(var(--solar-pink))] rounded-t transition-all duration-500"
                     style={{ height: `${consumptionHeight}%` }}
                     title={`Consumption: ${point.consumption} ${unit}`}
                   />
@@ -68,11 +68,11 @@ export const SolarEnergyChart: React.FC<EnergyChartProps> = ({
         </div>
         <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#FFD60A]" />
+            <div className="w-3 h-3 rounded-full bg-[hsl(var(--solar-yellow))]" />
             <span className="text-sm">Production</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[#FF3D3D]" />
+            <div className="w-3 h-3 rounded-full bg-[hsl(var(--solar-red))]" />
             <span className="text-sm">Consumption</span>
           </div>
         </div>

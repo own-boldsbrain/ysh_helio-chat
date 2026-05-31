@@ -208,7 +208,7 @@ export function PDFProposalGenerator({ onToggleSidebar }: PDFProposalGeneratorPr
           </button>
           <div>
             <h1 className="text-lg font-bold flex items-center gap-2">
-              <FilePdf size={24} weight="fill" className="text-[#FF3D3D]" />
+              <FilePdf size={24} weight="fill" className="text-[hsl(var(--solar-red))]" />
               Gerador de Propostas PDF
             </h1>
             <p className="text-xs text-muted-foreground">Crie propostas técnico-comerciais profissionais</p>
@@ -237,10 +237,9 @@ export function PDFProposalGenerator({ onToggleSidebar }: PDFProposalGeneratorPr
             size="sm"
             onClick={handleDownloadPDF}
             disabled={isGenerating}
-            className="bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 text-white"
+            className="bg-gradient-solar-br hover:opacity-90 text-foreground"
           >
             <Download size={16} weight="bold" className="sm:mr-1.5" />
-            <span className="hidden sm:inline">{isGenerating ? "Gerando..." : "Baixar PDF"}</span>
           </Button>
         </div>
       </header>
@@ -652,7 +651,7 @@ export function PDFProposalGenerator({ onToggleSidebar }: PDFProposalGeneratorPr
               size="lg"
               onClick={handleDownloadPDF}
               disabled={isGenerating}
-              className="bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 text-white w-full sm:w-auto"
+              className="bg-gradient-solar-br hover:opacity-90 text-foreground w-full sm:w-auto"
             >
               <Download size={20} weight="bold" className="mr-2" />
               {isGenerating ? "Gerando PDF..." : "Baixar Proposta PDF"}

@@ -62,9 +62,9 @@ export function ResultsStep({ data, onComplete, onBack }: ResultsStepProps) {
         </div>
       </div>
 
-      <Card className="p-6 bg-gradient-to-br from-[#FFD60A]/10 via-[#FF3D3D]/10 to-[#FF0066]/10 border-2 border-[#FFD60A]/30">
+      <Card className="p-6 bg-gradient-to-br from-[hsl(var(--solar-yellow))]/10 via-[hsl(var(--solar-red))]/10 to-[hsl(var(--solar-pink))]/10 border-2 border-[hsl(var(--solar-yellow))]/30">
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] bg-clip-text text-transparent mb-2">
+          <h2 className="text-3xl font-bold bg-gradient-solar-r bg-clip-text text-transparent mb-2">
             Sistema Solar Fotovoltaico
           </h2>
           <p className="text-lg font-semibold">{sizing.systemPowerKWp} kWp</p>
@@ -72,14 +72,14 @@ export function ResultsStep({ data, onComplete, onBack }: ResultsStepProps) {
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-6">
           <div className="text-center">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFD60A] to-[#FF8800] flex items-center justify-center mx-auto mb-2">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(var(--solar-yellow))] to-[hsl(var(--solar-orange))] flex items-center justify-center mx-auto mb-2">
               <Sun size={24} weight="fill" className="text-white" />
             </div>
             <p className="text-2xl font-bold">{sizing.panels}</p>
             <p className="text-xs text-muted-foreground">Painéis</p>
           </div>
           <div className="text-center">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FF3D3D] to-[#FF0066] flex items-center justify-center mx-auto mb-2">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(var(--solar-red))] to-[hsl(var(--solar-pink))] flex items-center justify-center mx-auto mb-2">
               <Lightning size={24} weight="fill" className="text-white" />
             </div>
             <p className="text-2xl font-bold">{sizing.inverterPower} kW</p>
@@ -283,7 +283,7 @@ export function ResultsStep({ data, onComplete, onBack }: ResultsStepProps) {
 
       <Button
         onClick={onComplete}
-        className="w-full h-14 text-lg bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D] hover:opacity-90"
+        className="w-full h-14 text-lg bg-gradient-solar-r hover:opacity-90 text-foreground"
       >
         <CheckCircle size={24} weight="fill" className="mr-2" />
         <span>Finalizar e Salvar Proposta</span>

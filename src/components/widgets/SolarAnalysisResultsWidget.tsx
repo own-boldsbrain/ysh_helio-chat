@@ -115,11 +115,11 @@ export function SolarAnalysisResultsWidget({ data, onAction }: SolarAnalysisResu
       exit="exit"
     >
       <Card className="max-w-4xl border-2 shadow-2xl overflow-hidden bg-card">
-        <div className="bg-gradient-to-br from-[#FFD60A]/20 via-[#FF3D3D]/10 to-[#FF0066]/20 p-6 border-b border-border/40">
+        <div className="bg-gradient-to-br from-[hsl(var(--solar-yellow))]/20 via-[hsl(var(--solar-red))]/10 to-[hsl(var(--solar-pink))]/20 p-6 border-b border-border/40">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <motion.div 
-                className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] flex items-center justify-center shadow-lg"
+                className="w-14 h-14 rounded-xl bg-gradient-solar-br flex items-center justify-center shadow-lg"
                 whileHover={{ scale: 1.08, rotate: 8 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -132,7 +132,7 @@ export function SolarAnalysisResultsWidget({ data, onAction }: SolarAnalysisResu
                 </p>
               </div>
             </div>
-            <Badge className="bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] text-white font-bold px-4 py-2 text-sm">
+            <Badge className="bg-gradient-solar-r text-foreground font-bold px-4 py-2 text-sm">
               ✓ Análise Concluída
             </Badge>
           </div>
@@ -283,7 +283,7 @@ export function SolarAnalysisResultsWidget({ data, onAction }: SolarAnalysisResu
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="flex-1 min-w-[200px]">
                 <Button
                   onClick={handleRequestProposal}
-                  className="w-full bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 shadow-lg font-semibold h-12"
+                  className="w-full bg-gradient-solar-r hover:opacity-90 shadow-lg font-semibold h-12"
                 >
                   <Sun className="mr-2" size={20} weight="fill" />
                   Solicitar Proposta Comercial
@@ -456,7 +456,7 @@ export function SolarAnalysisResultsWidget({ data, onAction }: SolarAnalysisResu
                 <div className="flex items-center justify-between mb-6">
                   <div>
                     <p className="text-sm text-muted-foreground mb-2">Total Economizado</p>
-                    <p className="text-5xl font-bold bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] bg-clip-text text-transparent">
+                    <p className="text-5xl font-bold bg-gradient-solar-r bg-clip-text text-transparent">
                       {formatCurrency(data.financial.roi25Years)}
                     </p>
                   </div>

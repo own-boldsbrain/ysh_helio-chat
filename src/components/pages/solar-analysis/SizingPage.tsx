@@ -174,7 +174,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
                 </p>
               </div>
             </div>
-            <Button variant="outline" className="border-[#FFD60A] hover:bg-[#FFD60A]/10">
+            <Button variant="outline" className="border-[hsl(var(--solar-yellow))] hover:bg-[hsl(var(--solar-yellow))]/10">
               <Info className="mr-2" size={18} weight="bold" />
               Ver Guia
             </Button>
@@ -190,7 +190,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <MapPin size={24} weight="fill" className="text-[#FFD60A]" />
+                <MapPin size={24} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
                 Localização e Visualização do Telhado
               </CardTitle>
             </CardHeader>
@@ -212,7 +212,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
                       onClick={searchByCep}
                       disabled={isLoadingLocation}
                       variant="outline"
-                      className="border-[#FFD60A] hover:bg-[#FFD60A]/10"
+                      className="border-[hsl(var(--solar-yellow))] hover:bg-[hsl(var(--solar-yellow))]/10"
                     >
                       <MapPin size={18} weight="bold" />
                     </Button>
@@ -235,7 +235,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
                       onClick={searchByAddress}
                       disabled={isLoadingLocation}
                       variant="outline"
-                      className="border-[#FFD60A] hover:bg-[#FFD60A]/10"
+                      className="border-[hsl(var(--solar-yellow))] hover:bg-[hsl(var(--solar-yellow))]/10"
                     >
                       <MapPin size={18} weight="bold" />
                     </Button>
@@ -256,7 +256,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
               <div className="flex gap-2">
                 <Button
                   variant="outline"
-                  className="flex-1 border-[#FFD60A] hover:bg-[#FFD60A]/10"
+                  className="flex-1 border-[hsl(var(--solar-yellow))] hover:bg-[hsl(var(--solar-yellow))]/10"
                   onClick={() => toast.info("Modo de desenho ativado - clique no mapa para desenhar polígonos")}
                 >
                   <Polygon className="mr-2" size={18} weight="bold" />
@@ -264,7 +264,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
                 </Button>
                 <Button
                   variant="outline"
-                  className="flex-1 border-[#FF3D3D] hover:bg-[#FF3D3D]/10"
+                  className="flex-1 border-[hsl(var(--solar-red))] hover:bg-[hsl(var(--solar-red))]/10"
                   onClick={() => toast.info("Modo de string ativado - desenhe linhas para representar strings")}
                 >
                   <Pencil className="mr-2" size={18} weight="bold" />
@@ -303,7 +303,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Calculator size={24} weight="fill" className="text-[#FFD60A]" />
+                  <Calculator size={24} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
                   Dados do Consumo
                 </CardTitle>
               </CardHeader>
@@ -340,7 +340,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
 
                 <Button
                   onClick={calculateSystem}
-                  className="w-full bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 text-white"
+                  className="w-full bg-gradient-solar-r hover:opacity-90 text-foreground"
                   size="lg"
                 >
                   <Calculator className="mr-2" size={20} weight="bold" />
@@ -349,7 +349,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
 
                 <div className="p-4 bg-muted/50 rounded-lg space-y-2">
                   <h4 className="font-semibold flex items-center gap-2">
-                    <Info size={18} weight="fill" className="text-[#FFD60A]" />
+                    <Info size={18} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
                     Premissas do Cálculo
                   </h4>
                   <ul className="text-sm text-muted-foreground space-y-1">
@@ -369,24 +369,24 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
             transition={{ duration: 0.3, delay: 0.3 }}
           >
             {result ? (
-              <Card className="border-[#FFD60A] border-2">
+              <Card className="border-[hsl(var(--solar-yellow))] border-2">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Sun size={24} weight="fill" className="text-[#FFD60A]" />
+                    <Sun size={24} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
                     Resultado do Dimensionamento
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 bg-gradient-to-br from-[#FFD60A]/10 to-[#FF9F1C]/10 rounded-lg">
+                    <div className="p-4 bg-gradient-to-br from-[hsl(var(--solar-yellow))]/10 to-[hsl(var(--solar-orange))]/10 rounded-lg">
                       <p className="text-sm text-muted-foreground mb-1">Painéis Necessários</p>
                       <p className="text-3xl font-bold">{result.panels}</p>
                     </div>
-                    <div className="p-4 bg-gradient-to-br from-[#FFD60A]/10 to-[#FF9F1C]/10 rounded-lg">
+                    <div className="p-4 bg-gradient-to-br from-[hsl(var(--solar-yellow))]/10 to-[hsl(var(--solar-orange))]/10 rounded-lg">
                       <p className="text-sm text-muted-foreground mb-1">Potência Total</p>
                       <p className="text-3xl font-bold">{result.power.toFixed(1)} kWp</p>
                     </div>
-                    <div className="p-4 bg-gradient-to-br from-[#FF3D3D]/10 to-[#FF0066]/10 rounded-lg">
+                    <div className="p-4 bg-gradient-to-br from-[hsl(var(--solar-red))]/10 to-[hsl(var(--solar-pink))]/10 rounded-lg">
                       <p className="text-sm text-muted-foreground mb-1">Área Necessária</p>
                       <p className="text-3xl font-bold">{result.area} m²</p>
                     </div>
@@ -396,7 +396,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
                     </div>
                   </div>
 
-                  <div className="p-6 bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] rounded-lg text-white">
+                  <div className="p-6 bg-gradient-solar-br rounded-lg text-foreground">
                     <p className="text-sm opacity-90 mb-1">Investimento Estimado</p>
                     <p className="text-4xl font-bold">
                       R$ {result.cost.toLocaleString('pt-BR')}
@@ -408,7 +408,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
 
                   <div className="space-y-2">
                     <h4 className="font-semibold flex items-center gap-2">
-                      <Lightning size={18} weight="fill" className="text-[#FFD60A]" />
+                      <Lightning size={18} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
                       Benefícios
                     </h4>
                     <ul className="text-sm space-y-2">
@@ -432,7 +432,7 @@ export function SizingPage({ onToggleSidebar }: SizingPageProps) {
                   </div>
 
                   <Button
-                    className="w-full bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 text-white"
+                    className="w-full bg-gradient-solar-r hover:opacity-90 text-foreground"
                     size="lg"
                   >
                     Solicitar Orçamento Detalhado

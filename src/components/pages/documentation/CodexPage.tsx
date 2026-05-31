@@ -272,7 +272,7 @@ export function CodexPage({ onToggleSidebar }: CodexPageProps) {
                               onClick={() => handleCopy(snippet.code, snippet.id)}
                             >
                               {copiedId === snippet.id ? (
-                                <CheckCircle size={18} weight="fill" className="text-green-500" />
+                                <CheckCircle size={18} weight="fill" className="text-success" />
                               ) : (
                                 <Copy size={18} weight="bold" />
                               )}

@@ -166,7 +166,7 @@ export function CreditAnalysisPage({ onToggleSidebar }: CreditAnalysisPageProps)
         label: 'Aprovado',
         variant: 'default' as const,
         icon: CheckCircle,
-        color: 'text-green-600'
+        color: 'text-success'
       },
       rejected: {
         label: 'Reprovado',
@@ -179,7 +179,7 @@ export function CreditAnalysisPage({ onToggleSidebar }: CreditAnalysisPageProps)
   }
 
   const getCreditScoreColor = (score: number) => {
-    if (score >= 700) return 'text-green-600'
+    if (score >= 700) return 'text-success'
     if (score >= 600) return 'text-yellow-600'
     return 'text-red-600'
   }
@@ -206,13 +206,16 @@ export function CreditAnalysisPage({ onToggleSidebar }: CreditAnalysisPageProps)
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <button
+                type="button"
                 onClick={onToggleSidebar}
-                className="w-10 h-10 rounded-xl hover:bg-accent/10 flex items-center justify-center transition-colors flex-shrink-0"
+                aria-label="Abrir menu lateral"
+                title="Abrir menu lateral"
+                className="w-10 h-10 rounded-xl hover:bg-accent/10 flex items-center justify-center transition-colors shrink-0"
               >
                 <List size={22} weight="bold" />
               </button>
               <motion.div 
-                className="w-11 h-11 rounded-xl bg-gradient-to-br from-accent via-accent/90 to-accent/80 flex items-center justify-center shadow-lg"
+                className="w-11 h-11 rounded-xl bg-linear-to-br from-accent via-accent/90 to-accent/80 flex items-center justify-center shadow-lg"
                 whileHover={{ scale: 1.08, rotate: 8 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -295,6 +298,8 @@ export function CreditAnalysisPage({ onToggleSidebar }: CreditAnalysisPageProps)
                     <Label htmlFor="bank">Instituição Financeira</Label>
                     <select
                       id="bank"
+                      title="Instituição Financeira"
+                      aria-label="Instituição Financeira"
                       value={formData.bank}
                       onChange={(e) => setFormData({ ...formData, bank: e.target.value })}
                       className="w-full mt-1.5 px-3 py-2 rounded-lg border-2 border-input bg-background focus:border-accent focus:outline-none"
@@ -382,26 +387,26 @@ export function CreditAnalysisPage({ onToggleSidebar }: CreditAnalysisPageProps)
                         </div>
 
                         {analysis.status === 'approved' && analysis.approvedAmount && (
-                          <div className="mt-4 p-4 bg-green-50 border-2 border-green-200 rounded-lg">
-                            <h4 className="text-sm font-bold text-green-800 mb-2">
+                          <div className="mt-4 p-4 bg-success/10 border-2 border-success/20 rounded-lg">
+                            <h4 className="text-sm font-bold text-success mb-2">
                               ✓ Crédito Aprovado
                             </h4>
                             <div className="grid grid-cols-3 gap-4 text-sm">
                               <div>
-                                <span className="text-green-700">Valor aprovado:</span>
-                                <div className="font-bold text-green-900">
+                                <span className="text-success">Valor aprovado:</span>
+                                <div className="font-bold text-success">
                                   {formatCurrency(analysis.approvedAmount)}
                                 </div>
                               </div>
                               <div>
-                                <span className="text-green-700">Taxa de juros:</span>
-                                <div className="font-bold text-green-900">
+                                <span className="text-success">Taxa de juros:</span>
+                                <div className="font-bold text-success">
                                   {analysis.interestRate}% a.m.
                                 </div>
                               </div>
                               <div>
-                                <span className="text-green-700">Parcelas:</span>
-                                <div className="font-bold text-green-900">
+                                <span className="text-success">Parcelas:</span>
+                                <div className="font-bold text-success">
                                   {analysis.installments}x
                                 </div>
                               </div>

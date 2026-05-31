@@ -172,14 +172,14 @@ export function GPTsPage({ onToggleSidebar }: GPTsPageProps) {
               <List size={22} weight="bold" />
             </button>
             <motion.div 
-              className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] flex items-center justify-center shadow-lg"
+              className="w-11 h-11 rounded-xl bg-gradient-solar-br flex items-center justify-center shadow-lg"
               whileHover={{ scale: 1.08, rotate: 8 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <Compass className="text-white" size={24} weight="fill" />
             </motion.div>
             <div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold bg-gradient-solar-r bg-clip-text text-transparent">
                 Agentes Inteligentes Solar
               </h1>
               <p className="text-sm text-muted-foreground font-medium">
@@ -198,7 +198,7 @@ export function GPTsPage({ onToggleSidebar }: GPTsPageProps) {
               />
             </div>
             <Button 
-              className="gap-2 w-full sm:w-auto bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 text-white shadow-lg"
+              className="gap-2 w-full sm:w-auto bg-gradient-solar-br hover:opacity-90 text-white shadow-lg"
             >
               <Sparkle size={20} weight="fill" />
               Criar Agente Personalizado
@@ -246,14 +246,14 @@ export function GPTsPage({ onToggleSidebar }: GPTsPageProps) {
                       variant="secondary" 
                       className={cn(
                         "text-xs font-semibold",
-                        gpt.category === 'Solar' && "bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] text-white"
+                        gpt.category === 'Solar' && "bg-gradient-solar-r text-white"
                       )}
                     >
                       {gpt.category}
                     </Badge>
                   </div>
 
-                  <h3 className="text-lg font-bold mb-2 group-hover:bg-gradient-to-r group-hover:from-[#FFD60A] group-hover:via-[#FF3D3D] group-hover:to-[#FF0066] group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
+                  <h3 className="text-lg font-bold mb-2 group-hover:bg-gradient-solar-r group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                     {gpt.name}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 flex-1 leading-relaxed">
@@ -281,7 +281,7 @@ export function GPTsPage({ onToggleSidebar }: GPTsPageProps) {
                     <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                       <Button 
                         size="sm" 
-                        className="gap-1 bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] text-white hover:opacity-90 shadow-md"
+                        className="gap-1 bg-gradient-solar-r text-white hover:opacity-90 shadow-md"
                       >
                         Usar Agora
                         <ArrowRight size={14} weight="bold" />
@@ -299,7 +299,7 @@ export function GPTsPage({ onToggleSidebar }: GPTsPageProps) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#FFD60A]/20 via-[#FF3D3D]/20 to-[#FF0066]/20 flex items-center justify-center mb-4">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-solar-br opacity-20 flex items-center justify-center mb-4">
                 <Compass size={40} className="text-accent" weight="duotone" />
               </div>
               <h3 className="text-xl font-bold mb-2">Nenhum agente encontrado</h3>
@@ -307,7 +307,7 @@ export function GPTsPage({ onToggleSidebar }: GPTsPageProps) {
                 Tente ajustar sua busca ou limpar os filtros
               </p>
               <Button 
-                className="mt-4 bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] text-white"
+                className="mt-4 bg-gradient-solar-r text-white"
                 onClick={() => {
                   setSearchQuery("")
                   setSelectedCategory(null)

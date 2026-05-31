@@ -93,7 +93,7 @@ export function EquipmentSelectionStep({ data, onNext, onBack }: EquipmentSelect
       <div className="space-y-6">
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <SolarPanel size={24} weight="fill" className="text-[#FFD60A]" />
+            <SolarPanel size={24} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
             <h4 className="text-lg font-bold">Módulos Fotovoltaicos ({panels} unidades)</h4>
           </div>
           <div className="grid gap-3">
@@ -144,7 +144,7 @@ export function EquipmentSelectionStep({ data, onNext, onBack }: EquipmentSelect
 
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <Lightning size={24} weight="fill" className="text-[#FF3D3D]" />
+            <Lightning size={24} weight="fill" className="text-[hsl(var(--solar-red))]" />
             <h4 className="text-lg font-bold">Inversor Solar</h4>
           </div>
           <div className="grid gap-3">
@@ -179,7 +179,7 @@ export function EquipmentSelectionStep({ data, onNext, onBack }: EquipmentSelect
                           <p className="font-bold">{inverter.brand}</p>
                           <Badge variant="outline">{inverter.power} kW</Badge>
                           {isCompatible && inverter.id === bestInverter.id && (
-                            <Badge className="bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D]">
+                            <Badge className="bg-gradient-solar-r text-foreground">
                               Recomendado
                             </Badge>
                           )}
@@ -280,7 +280,7 @@ export function EquipmentSelectionStep({ data, onNext, onBack }: EquipmentSelect
         </Button>
         <Button
           onClick={handleSubmit}
-          className="flex-1 h-12 bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D] hover:opacity-90"
+          className="flex-1 h-12 bg-gradient-solar-r hover:opacity-90 text-foreground"
         >
           <span>Continuar</span>
           <ArrowRight size={20} className="ml-2" weight="bold" />

@@ -100,6 +100,11 @@ const defaultTheme = {
       "2xl": "var(--radius-2xl)",
       full: "var(--radius-full)",
     },
+    backgroundImage: {
+      'gradient-solar': 'linear-gradient(135deg, var(--solar-gradient-start), var(--solar-gradient-middle), var(--solar-gradient-end))',
+      'gradient-solar-r': 'linear-gradient(to right, var(--solar-gradient-start), var(--solar-gradient-middle), var(--solar-gradient-end))',
+      'gradient-solar-br': 'linear-gradient(to bottom right, var(--solar-gradient-start), var(--solar-gradient-middle), var(--solar-gradient-end))',
+    },
   },
   spacing: {
     px: "var(--size-px)",
@@ -138,7 +143,7 @@ const defaultTheme = {
     80: "var(--size-80)",
     96: "var(--size-96)",
   },
-  darkMode: ["selector", '[data-appearance="dark"]'],
+  darkMode: ["class"],
 }
 
 export default {

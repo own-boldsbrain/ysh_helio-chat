@@ -969,7 +969,7 @@ Mensagem do usuário: ${lastUserMessage.content}`;
                 />
               </motion.div>
               <div className='min-w-0 flex flex-col justify-center -mt-px'>
-                <h1 className='text-[15px] sm:text-base font-bold bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] bg-clip-text text-transparent truncate leading-[1.25]'>
+                <h1 className='text-[15px] sm:text-base font-bold bg-gradient-solar-r bg-clip-text text-transparent truncate leading-[1.25]'>
                   Yello Solar Hub
                 </h1>
                 <p className='text-[11px] text-muted-foreground font-medium hidden sm:block leading-[1.3] -mt-px'>
@@ -1123,7 +1123,7 @@ Mensagem do usuário: ${lastUserMessage.content}`;
                             autoPlay={true}
                           />
                         </motion.div>
-                        <h2 className='text-3xl sm:text-4xl font-bold mb-3 bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] bg-clip-text text-transparent leading-[1.2]'>
+                        <h2 className='text-3xl sm:text-4xl font-bold mb-3 bg-gradient-solar-r bg-clip-text text-transparent leading-[1.2]'>
                           Bem-vindo ao Yello Solar Hub
                         </h2>
                         <p className='text-muted-foreground text-base leading-[1.6] mb-1'>
@@ -1151,14 +1151,14 @@ Mensagem do usuário: ${lastUserMessage.content}`;
                           style={{ willChange: "transform" }}>
                           <Button
                             variant='outline'
-                            className='h-auto py-4 px-4 flex flex-col items-start gap-2 w-full border-2 hover:border-[#FFD60A] hover:bg-[#FFD60A]/5 hover:shadow-lg transition-all group'
+                            className='h-auto py-4 px-4 flex flex-col items-start gap-2 w-full border-2 hover:border-[hsl(var(--solar-yellow))] hover:bg-[hsl(var(--solar-yellow))]/5 hover:shadow-lg transition-all group'
                             onClick={() =>
                               setInput(
                                 "Analise minha fatura de energia e dimensione um sistema solar"
                               )
                             }>
                             <div className='flex items-center gap-2.5 w-full'>
-                              <div className='w-10 h-10 rounded-xl bg-gradient-to-br from-[#FFD60A] to-[#FF8800] flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow flex-shrink-0'>
+                              <div className='w-10 h-10 rounded-xl bg-gradient-to-br from-[hsl(var(--solar-yellow))] to-[hsl(var(--solar-orange))] flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow flex-shrink-0'>
                                 <span className='text-2xl leading-none'>
                                   📊
                                 </span>
@@ -1182,14 +1182,14 @@ Mensagem do usuário: ${lastUserMessage.content}`;
                           style={{ willChange: "transform" }}>
                           <Button
                             variant='outline'
-                            className='h-auto py-4 px-4 flex flex-col items-start gap-2 w-full border-2 hover:border-[#FFD60A] hover:bg-[#FFD60A]/5 hover:shadow-lg transition-all group'
+                            className='h-auto py-4 px-4 flex flex-col items-start gap-2 w-full border-2 hover:border-[hsl(var(--solar-yellow))] hover:bg-[hsl(var(--solar-yellow))]/5 hover:shadow-lg transition-all group'
                             onClick={() =>
                               setInput(
                                 "Selecione equipamentos para um projeto de 10kWp"
                               )
                             }>
                             <div className='flex items-center gap-2.5 w-full'>
-                              <div className='w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF3D3D] to-[#FF0066] flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow flex-shrink-0'>
+                              <div className='w-10 h-10 rounded-xl bg-gradient-to-br from-[hsl(var(--solar-red))] to-[hsl(var(--solar-pink))] flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow flex-shrink-0'>
                                 <span className='text-2xl leading-none'>
                                   ☀️
                                 </span>
@@ -1213,7 +1213,7 @@ Mensagem do usuário: ${lastUserMessage.content}`;
                           style={{ willChange: "transform" }}>
                           <Button
                             variant='outline'
-                            className='h-auto py-4 px-4 flex flex-col items-start gap-2 w-full border-2 hover:border-[#FFD60A] hover:bg-[#FFD60A]/5 hover:shadow-lg transition-all group'
+                            className='h-auto py-4 px-4 flex flex-col items-start gap-2 w-full border-2 hover:border-[hsl(var(--solar-yellow))] hover:bg-[hsl(var(--solar-yellow))]/5 hover:shadow-lg transition-all group'
                             onClick={() =>
                               setInput(
                                 "Consulte irradiação solar em Belo Horizonte e estime a produção anual"
@@ -1244,7 +1244,7 @@ Mensagem do usuário: ${lastUserMessage.content}`;
                           style={{ willChange: "transform" }}>
                           <Button
                             variant='outline'
-                            className='h-auto py-4 px-4 flex flex-col items-start gap-2 w-full border-2 hover:border-[#FFD60A] hover:bg-[#FFD60A]/5 hover:shadow-lg transition-all group'
+                            className='h-auto py-4 px-4 flex flex-col items-start gap-2 w-full border-2 hover:border-[hsl(var(--solar-yellow))] hover:bg-[hsl(var(--solar-yellow))]/5 hover:shadow-lg transition-all group'
                             onClick={() =>
                               setInput(
                                 "Simule financiamento para um projeto de R$ 45.000"
@@ -1376,7 +1376,7 @@ Mensagem do usuário: ${lastUserMessage.content}`;
                   <Button
                     type='submit'
                     disabled={!input.trim() || isLoading}
-                    className='bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 text-white h-[52px] w-[52px] sm:w-auto sm:px-5 shadow-lg hover:shadow-xl transition-all flex-shrink-0'
+                    className='bg-gradient-solar-br hover:opacity-90 text-foreground h-[52px] w-[52px] sm:w-auto sm:px-5 shadow-lg hover:shadow-xl transition-all flex-shrink-0'
                     aria-label={isLoading ? "Enviando..." : "Enviar mensagem"}>
                     {isLoading ? (
                       <motion.div

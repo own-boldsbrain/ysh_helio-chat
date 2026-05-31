@@ -69,7 +69,7 @@ export function ScenarioComparison({
             >
               {scenario.recommended && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <Badge className="bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D] text-white px-3 py-1">
+                  <Badge className="bg-gradient-solar-r text-foreground px-3 py-1">
                     ⭐ Recomendado
                   </Badge>
                 </div>
@@ -80,7 +80,7 @@ export function ScenarioComparison({
                   <div className={`
                     w-14 h-14 rounded-2xl flex items-center justify-center
                     ${scenario.recommended 
-                      ? 'bg-gradient-to-br from-[#FFD60A] to-[#FF3D3D]' 
+                    ? 'bg-gradient-solar-br' 
                       : 'bg-muted'
                     }
                   `}>

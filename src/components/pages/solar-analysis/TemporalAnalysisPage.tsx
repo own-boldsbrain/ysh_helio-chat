@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -9,13 +9,58 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Progress } from "@/components/ui/progress"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { List, CalendarBlank, SlidersHorizontal, CloudArrowDown, PlayCircle, PauseCircle, ArrowsClockwise, TrendUp, TrendDown, Minus, Leaf, Buildings, TreeEvergreen, ChartLine, Download, MapPin, Sparkle, ArrowsLeftRight } from "@phosphor-icons/react"
-import { motion, AnimatePresence } from "framer-motion"
+import { List, CalendarBlank, SlidersHorizontal, PlayCircle, PauseCircle, ArrowsClockwise, TrendUp, TrendDown, Minus, Leaf, Buildings, TreeEvergreen, Sparkle, ArrowsLeftRight } from "@phosphor-icons/react"
+import { motion } from "framer-motion"
 import { toast } from "sonner"
 import { useKV } from "@github/spark/hooks"
 import { ImageComparisonSlider } from "@/components/solar/ImageComparisonSlider"
 
-declare const maplibregl: any
+type SatelliteSource = "Sentinel-2" | "CBERS-4" | "Landsat-8"
+type SatelliteSourceFilter = "all" | SatelliteSource
+type AnalysisMetric = "ndvi" | "ndbi" | "ndwi" | "rgb"
+
+interface MapClickEvent {
+  lngLat: {
+    lat: number
+    lng: number
+  }
+}
+
+interface MapLibreMap {
+  addControl: (control: unknown, position?: string) => void
+  on: (event: "click", handler: (event: MapClickEvent) => void) => void
+  remove: () => void
+}
+
+interface MapLibreMarker {
+  setLngLat: (coordinates: [number, number]) => MapLibreMarker
+  addTo: (map: MapLibreMap) => void
+}
+
+interface MapLibreStatic {
+  Map: new (options: {
+    container: HTMLDivElement
+    center: [number, number]
+    zoom: number
+    pitch: number
+    maxPitch: number
+    style: {
+      version: number
+      sources: Record<string, unknown>
+      layers: Array<Record<string, unknown>>
+    }
+  }) => MapLibreMap
+  NavigationControl: new () => unknown
+  GeolocateControl: new (options: {
+    positionOptions: {
+      enableHighAccuracy: boolean
+    }
+    trackUserLocation: boolean
+  }) => unknown
+  Marker: new (options: { color: string }) => MapLibreMarker
+}
+
+declare const maplibregl: MapLibreStatic
 
 interface TemporalAnalysisPageProps {
   onToggleSidebar: () => void
@@ -36,7 +81,7 @@ interface SatelliteImage {
   ndwi?: number
   metadata?: {
     bbox?: number[]
-    assets?: Record<string, any>
+    assets?: Record<string, unknown>
     stacUrl?: string
   }
 }
@@ -71,17 +116,24 @@ interface AnalysisResult {
   }
 }
 
+interface AnalysisHistoryEntry {
+  id: string
+  location: { lat: number; lon: number }
+  date: string
+  result: AnalysisResult
+  analysis: string
+}
+
 export function TemporalAnalysisPage({ onToggleSidebar }: TemporalAnalysisPageProps) {
   const mapContainer = useRef<HTMLDivElement>(null)
-  const map = useRef<any>(null)
+  const map = useRef<MapLibreMap | null>(null)
   
   const [selectedLocation, setSelectedLocation] = useState<{ lat: number; lon: number } | null>(null)
-  const [dateRange, setDateRange] = useState<[string, string]>(["2020-01", "2024-12"])
-  const [selectedSource, setSelectedSource] = useState<"all" | "Sentinel-2" | "CBERS-4" | "Landsat-8">("all")
+  const [selectedSource, setSelectedSource] = useState<SatelliteSourceFilter>("all")
   const [timelinePosition, setTimelinePosition] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [playbackSpeed, setPlaybackSpeed] = useState(1)
-  const [selectedMetric, setSelectedMetric] = useState<"ndvi" | "ndbi" | "ndwi" | "rgb">("ndvi")
+  const [selectedMetric, setSelectedMetric] = useState<AnalysisMetric>("ndvi")
   const [isLoading, setIsLoading] = useState(false)
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   
@@ -90,8 +142,7 @@ export function TemporalAnalysisPage({ onToggleSidebar }: TemporalAnalysisPagePr
   const [changeDetections, setChangeDetections] = useState<ChangeDetection[]>([])
   const [timeSeriesData, setTimeSeriesData] = useState<TimeSeriesData[]>([])
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null)
-  const [showChangeLayer, setShowChangeLayer] = useState(true)
-  const [analysisHistory, setAnalysisHistory] = useKV<any[]>("temporal-analysis-history", [])
+  const [, setAnalysisHistory] = useKV<AnalysisHistoryEntry[]>("temporal-analysis-history", [])
   const [showComparison, setShowComparison] = useState(false)
   const [comparisonImages, setComparisonImages] = useState<{ before: SatelliteImage | null; after: SatelliteImage | null }>({
     before: null,
@@ -173,13 +224,12 @@ export function TemporalAnalysisPage({ onToggleSidebar }: TemporalAnalysisPagePr
     }
   }, [])
 
-  useEffect(() => {
-    if (selectedLocation) {
-      loadAvailableImages()
+  const loadAvailableImages = useCallback(async () => {
+    const location = selectedLocation
+    if (!location) {
+      return
     }
-  }, [selectedLocation, selectedSource])
 
-  const loadAvailableImages = async () => {
     setIsLoading(true)
     
     await new Promise(resolve => setTimeout(resolve, 1500))
@@ -332,7 +382,7 @@ export function TemporalAnalysisPage({ onToggleSidebar }: TemporalAnalysisPagePr
       : mockImages.filter(img => img.source === selectedSource)
     
     setAvailableImages(filteredImages.sort((a, b) => a.timestamp - b.timestamp))
-    setCurrentImage(filteredImages[0])
+    setCurrentImage(filteredImages[0] ?? null)
     
     const mockTimeSeries: TimeSeriesData[] = filteredImages.map(img => ({
       date: img.date,
@@ -347,7 +397,7 @@ export function TemporalAnalysisPage({ onToggleSidebar }: TemporalAnalysisPagePr
       {
         type: "deforestation",
         area: 2.4,
-        location: { lat: selectedLocation!.lat + 0.01, lon: selectedLocation!.lon + 0.01 },
+        location: { lat: location.lat + 0.01, lon: location.lon + 0.01 },
         severity: "high",
         confidence: 94,
         changeValue: -0.37,
@@ -356,7 +406,7 @@ export function TemporalAnalysisPage({ onToggleSidebar }: TemporalAnalysisPagePr
       {
         type: "construction",
         area: 0.8,
-        location: { lat: selectedLocation!.lat - 0.005, lon: selectedLocation!.lon + 0.008 },
+        location: { lat: location.lat - 0.005, lon: location.lon + 0.008 },
         severity: "medium",
         confidence: 87,
         changeValue: 0.43,
@@ -365,7 +415,7 @@ export function TemporalAnalysisPage({ onToggleSidebar }: TemporalAnalysisPagePr
       {
         type: "urbanization",
         area: 1.5,
-        location: { lat: selectedLocation!.lat + 0.008, lon: selectedLocation!.lon - 0.01 },
+        location: { lat: location.lat + 0.008, lon: location.lon - 0.01 },
         severity: "medium",
         confidence: 91,
         changeValue: 0.40,
@@ -377,7 +427,15 @@ export function TemporalAnalysisPage({ onToggleSidebar }: TemporalAnalysisPagePr
     setIsLoading(false)
     
     toast.success(`${filteredImages.length} imagens encontradas para análise temporal`)
-  }
+  }, [selectedLocation, selectedSource])
+
+  useEffect(() => {
+    if (!selectedLocation) {
+      return
+    }
+
+    void loadAvailableImages()
+  }, [selectedLocation, loadAvailableImages])
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying)
@@ -413,6 +471,12 @@ export function TemporalAnalysisPage({ onToggleSidebar }: TemporalAnalysisPagePr
       return
     }
 
+    const location = selectedLocation
+    if (!location) {
+      toast.error("Selecione uma localização no mapa para continuar")
+      return
+    }
+
     setIsAnalyzing(true)
     toast.info("Analisando mudanças temporais com IA...")
     
@@ -422,7 +486,7 @@ export function TemporalAnalysisPage({ onToggleSidebar }: TemporalAnalysisPagePr
       
       const promptText = `Analise as mudanças temporais detectadas em imagens de satélite entre ${firstImage.date} e ${lastImage.date}.
       
-Localização: Lat ${selectedLocation!.lat.toFixed(4)}, Lon ${selectedLocation!.lon.toFixed(4)}
+    Localização: Lat ${location.lat.toFixed(4)}, Lon ${location.lon.toFixed(4)}
 
 Dados das imagens:
 ${availableImages.map(img => `- ${img.date}: NDVI=${img.ndvi?.toFixed(2)}, NDBI=${img.ndbi?.toFixed(2)}, NDWI=${img.ndwi?.toFixed(2)}, Nuvens=${img.cloudCoverage}%`).join('\n')}
@@ -543,7 +607,7 @@ Limite a 4 parágrafos curtos.`
             <List size={22} weight="bold" />
           </Button>
           <div>
-            <h1 className="text-lg font-bold bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] bg-clip-text text-transparent">
+            <h1 className="text-lg font-bold bg-gradient-solar-r bg-clip-text text-transparent">
               Análise Temporal de Satélite
             </h1>
             <p className="text-xs text-muted-foreground">
@@ -597,9 +661,9 @@ Limite a 4 parágrafos curtos.`
 
                   {currentImage.ndvi !== undefined && (
                     <div className="grid grid-cols-3 gap-2 text-xs">
-                      <div className="bg-green-500/10 rounded-lg p-2">
+                      <div className="bg-success/10 rounded-lg p-2">
                         <p className="text-muted-foreground">NDVI</p>
-                        <p className="font-bold text-green-700 dark:text-green-300">{currentImage.ndvi.toFixed(2)}</p>
+                        <p className="font-bold text-success">{currentImage.ndvi.toFixed(2)}</p>
                       </div>
                       <div className="bg-orange-500/10 rounded-lg p-2">
                         <p className="text-muted-foreground">NDBI</p>
@@ -667,9 +731,9 @@ Limite a 4 parágrafos curtos.`
           <ScrollArea className="flex-1">
             <div className="p-4 space-y-6">
               <div className="space-y-3">
-                <label className="text-sm font-medium">Fonte de Dados</label>
-                <Select value={selectedSource} onValueChange={(value: any) => setSelectedSource(value)}>
-                  <SelectTrigger>
+                <label htmlFor="temporal-data-source" className="text-sm font-medium">Fonte de Dados</label>
+                <Select value={selectedSource} onValueChange={(value: SatelliteSourceFilter) => setSelectedSource(value)}>
+                  <SelectTrigger id="temporal-data-source" aria-label="Fonte de dados" title="Fonte de dados">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -681,9 +745,9 @@ Limite a 4 parágrafos curtos.`
               </div>
 
               <div className="space-y-3">
-                <label className="text-sm font-medium">Métrica de Análise</label>
-                <Select value={selectedMetric} onValueChange={(value: any) => setSelectedMetric(value)}>
-                  <SelectTrigger>
+                <label htmlFor="temporal-analysis-metric" className="text-sm font-medium">Métrica de Análise</label>
+                <Select value={selectedMetric} onValueChange={(value: AnalysisMetric) => setSelectedMetric(value)}>
+                  <SelectTrigger id="temporal-analysis-metric" aria-label="Métrica de análise" title="Métrica de análise">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -763,7 +827,7 @@ Limite a 4 parágrafos curtos.`
                     <Button
                       onClick={handleAnalyzeChanges}
                       disabled={isAnalyzing}
-                      className="w-full bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90"
+                      className="w-full bg-gradient-solar-r hover:opacity-90"
                     >
                       {isAnalyzing ? (
                         <>
@@ -797,7 +861,7 @@ Limite a 4 parágrafos curtos.`
                         <div className="space-y-2">
                           {changeDetections.map((change, index) => (
                             <motion.div
-                              key={index}
+                              key={`${change.type}-${change.period.start}-${change.period.end}`}
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: index * 0.1 }}
@@ -825,7 +889,7 @@ Limite a 4 parágrafos curtos.`
                                     </div>
                                     <div className="flex items-center justify-between text-muted-foreground">
                                       <span>Mudança:</span>
-                                      <span className={`font-medium ${change.changeValue > 0 ? 'text-green-600' : 'text-red-600'}`}>
+                                      <span className={`font-medium ${change.changeValue > 0 ? 'text-success' : 'text-red-600'}`}>
                                         {change.changeValue > 0 ? '+' : ''}{(change.changeValue * 100).toFixed(1)}%
                                       </span>
                                     </div>
@@ -850,7 +914,7 @@ Limite a 4 parágrafos curtos.`
                               <CardContent className="p-3 space-y-2">
                                 <div className="flex items-center justify-between text-sm">
                                   <span className="text-muted-foreground">NDVI Médio</span>
-                                  <span className="font-medium text-green-700 dark:text-green-300">
+                                  <span className="font-medium text-success">
                                     {analysisResult.statistics.meanNDVI.toFixed(3)}
                                   </span>
                                 </div>
@@ -883,29 +947,23 @@ Limite a 4 parágrafos curtos.`
                           <div className="space-y-2">
                             <h4 className="text-sm font-medium">Série Temporal</h4>
                             <div className="space-y-1">
-                              {timeSeriesData.map((point, index) => (
-                                <div key={index} className="text-xs p-2 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
+                              {timeSeriesData.map((point) => (
+                                <div key={point.date} className="text-xs p-2 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
                                   <div className="flex items-center justify-between mb-1">
                                     <span className="font-medium">{new Date(point.date).toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' })}</span>
                                   </div>
                                   <div className="grid grid-cols-3 gap-2">
                                     <div>
                                       <span className="text-muted-foreground">NDVI</span>
-                                      <div className="w-full bg-green-500/20 rounded-full h-1.5 mt-1">
-                                        <div className="bg-green-500 h-1.5 rounded-full" style={{ width: `${point.ndvi * 100}%` }} />
-                                      </div>
+                                      <Progress value={point.ndvi * 100} className="mt-1 h-1.5 bg-success/20 [&>div]:bg-success" />
                                     </div>
                                     <div>
                                       <span className="text-muted-foreground">NDBI</span>
-                                      <div className="w-full bg-orange-500/20 rounded-full h-1.5 mt-1">
-                                        <div className="bg-orange-500 h-1.5 rounded-full" style={{ width: `${point.ndbi * 100}%` }} />
-                                      </div>
+                                      <Progress value={point.ndbi * 100} className="mt-1 h-1.5 bg-orange-500/20 [&>div]:bg-orange-500" />
                                     </div>
                                     <div>
                                       <span className="text-muted-foreground">NDWI</span>
-                                      <div className="w-full bg-blue-500/20 rounded-full h-1.5 mt-1">
-                                        <div className="bg-blue-500 h-1.5 rounded-full" style={{ width: `${point.ndwi * 100}%` }} />
-                                      </div>
+                                      <Progress value={point.ndwi * 100} className="mt-1 h-1.5 bg-blue-500/20 [&>div]:bg-blue-500" />
                                     </div>
                                   </div>
                                 </div>
@@ -994,7 +1052,7 @@ Limite a 4 parágrafos curtos.`
               </Button>
               <Button
                 size="sm"
-                className="bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 flex-1"
+                className="bg-gradient-solar-r hover:opacity-90 flex-1"
                 onClick={handleComparisonAnalysis}
               >
                 <Sparkle size={16} weight="fill" className="mr-2" />

@@ -36,7 +36,7 @@ export function SolarEquipmentWidget({ equipment, onSelect, onAddToCart }: Solar
     <Card className="p-6 border-2">
       <div className="space-y-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFD60A] to-[#FF8800] flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(var(--solar-yellow))] to-[hsl(var(--solar-orange))] flex items-center justify-center shadow-lg">
             <Package size={24} weight="bold" className="text-white" />
           </div>
           <div>
@@ -56,8 +56,8 @@ export function SolarEquipmentWidget({ equipment, onSelect, onAddToCart }: Solar
               <Card
                 className={`p-4 transition-all border-2 hover:shadow-lg cursor-pointer ${
                   selectedId === item.id
-                    ? 'border-[#FFD60A] bg-[#FFD60A]/5'
-                    : 'border-border hover:border-[#FFD60A]/50'
+                    ? 'border-[hsl(var(--solar-yellow))] bg-[hsl(var(--solar-yellow))]/5'
+                    : 'border-border hover:border-[hsl(var(--solar-yellow))]/50'
                 }`}
                 onClick={() => handleSelect(item)}
               >
@@ -88,7 +88,7 @@ export function SolarEquipmentWidget({ equipment, onSelect, onAddToCart }: Solar
                         transition={{ type: "spring", stiffness: 400, damping: 20 }}
                         className="flex-shrink-0"
                       >
-                        <CheckCircle size={24} weight="fill" className="text-[#FFD60A]" />
+                        <CheckCircle size={24} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
                       </motion.div>
                     )}
                   </div>
@@ -122,7 +122,7 @@ export function SolarEquipmentWidget({ equipment, onSelect, onAddToCart }: Solar
                         onAddToCart?.(item)
                       }}
                       size="sm"
-                      className="bg-gradient-to-r from-[#FFD60A] to-[#FF8800] hover:opacity-90 text-white"
+                      className="bg-gradient-to-r from-[hsl(var(--solar-yellow))] to-[hsl(var(--solar-orange))] hover:opacity-90 text-foreground"
                     >
                       <ShoppingCart size={16} weight="bold" className="mr-1" />
                       Adicionar

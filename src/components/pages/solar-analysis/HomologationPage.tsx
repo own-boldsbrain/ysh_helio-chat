@@ -28,15 +28,6 @@ interface HomologationProject {
   }[]
 }
 
-const distributors = [
-  "CEMIG - Companhia Energética de Minas Gerais",
-  "CPFL - Companhia Paulista de Força e Luz",
-  "Enel - Enel Distribuição",
-  "Light - Light Serviços de Eletricidade",
-  "Energisa - Energisa",
-  "Copel - Copel Distribuição"
-]
-
 export function HomologationPage({ onToggleSidebar }: HomologationPageProps) {
   const [projects, setProjects] = useKV<HomologationProject[]>("homologation-projects", [
     {
@@ -89,7 +80,7 @@ export function HomologationPage({ onToggleSidebar }: HomologationPageProps) {
     }
   ])
 
-  const [showNewForm, setShowNewForm] = useState(false)
+  const [, setShowNewForm] = useState(false)
 
   const getStatusConfig = (status: HomologationProject['status']) => {
     const configs = {
@@ -109,7 +100,7 @@ export function HomologationPage({ onToggleSidebar }: HomologationPageProps) {
         label: 'Aprovado',
         variant: 'default' as const,
         icon: CheckCircle,
-        color: 'text-green-600'
+        color: 'text-success'
       },
       rejected: {
         label: 'Rejeitado',
@@ -124,7 +115,7 @@ export function HomologationPage({ onToggleSidebar }: HomologationPageProps) {
   const getDocumentStatusIcon = (status: string) => {
     switch (status) {
       case 'approved':
-        return <CheckCircle size={16} weight="fill" className="text-green-600" />
+        return <CheckCircle size={16} weight="fill" className="text-success" />
       case 'uploaded':
         return <Clock size={16} weight="fill" className="text-blue-600" />
       case 'rejected':
@@ -165,13 +156,16 @@ export function HomologationPage({ onToggleSidebar }: HomologationPageProps) {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <button
+                type="button"
                 onClick={onToggleSidebar}
-                className="w-10 h-10 rounded-xl hover:bg-accent/10 flex items-center justify-center transition-colors flex-shrink-0"
+                aria-label="Abrir menu lateral"
+                title="Abrir menu lateral"
+                className="w-10 h-10 rounded-xl hover:bg-accent/10 flex items-center justify-center transition-colors shrink-0"
               >
                 <List size={22} weight="bold" />
               </button>
               <motion.div 
-                className="w-11 h-11 rounded-xl bg-gradient-to-br from-accent via-accent/90 to-accent/80 flex items-center justify-center shadow-lg"
+                className="w-11 h-11 rounded-xl bg-linear-to-br from-accent via-accent/90 to-accent/80 flex items-center justify-center shadow-lg"
                 whileHover={{ scale: 1.08, rotate: 8 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -296,7 +290,7 @@ export function HomologationPage({ onToggleSidebar }: HomologationPageProps) {
                         Baixar Documentos
                       </Button>
                       {project.status === 'approved' && (
-                        <Button variant="default" size="sm" className="flex-1 bg-green-600">
+                        <Button variant="default" size="sm" className="flex-1 bg-success hover:bg-success/90">
                           <CheckCircle size={16} weight="bold" />
                           Parecer de Acesso
                         </Button>

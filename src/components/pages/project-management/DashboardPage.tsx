@@ -140,8 +140,7 @@ export function DashboardPage({ onToggleSidebar }: DashboardPageProps) {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Sun size={24} weight="fill" className="text-[#FFD60A]" />
-                  Status do Sistema
+                  <Sun size={24} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -187,7 +186,7 @@ export function DashboardPage({ onToggleSidebar }: DashboardPageProps) {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <CloudSun size={24} weight="fill" className="text-[#FFD60A]" />
+                  <CloudSun size={24} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
                   Condições Climáticas
                 </CardTitle>
               </CardHeader>

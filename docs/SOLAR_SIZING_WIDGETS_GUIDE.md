@@ -65,6 +65,7 @@ This guide documents the three new interactive solar sizing widgets that enable 
 - N
 
 **API Integration**:
+
 - **Service**: OpenStreetMap Nominatim
 - **Endpoint**: `https://nominatim.openstreetmap.org/search`
 - **Rate Limit**: 1 request per second (handled by 500ms debounce)

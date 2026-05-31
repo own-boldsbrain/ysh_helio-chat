@@ -1,23 +1,27 @@
 # Comprehensive Test Coverage Plan for Serverless Solar APIs
 
 ## Overview
+
 This document outlines a 360º test coverage strategy for the PVGIS, NASA POWER, and ANEEL serverless APIs. The plan ensures comprehensive testing of all endpoints while maintaining code quality and reliability.
 
 ## Test Strategy
 
 ### 1. Unit Tests (40% coverage)
+
 - Test individual API handlers in isolation
 - Mock external dependencies and HTTP clients
 - Validate request/response schemas
 - Test error handling scenarios
 
-### 2. Integration Tests (40% coverage)  
+### 2. Integration Tests (40% coverage)
+
 - Test API endpoints with real dependencies (where possible)
 - Validate caching mechanisms
 - Test rate limiting functionality
 - Verify data transformation logic
 
 ### 3. End-to-End Tests (20% coverage)
+
 - Test complete API workflows
 - Validate real-world usage scenarios
 - Test API performance and response times
@@ -135,6 +139,7 @@ This document outlines a 360º test coverage strategy for the PVGIS, NASA POWER,
 5. Rate limiting effectiveness
 
 ## Security Tests
+
 1. Input validation for XSS prevention
 2. Rate limiting effectiveness
 3. Authentication bypass attempts
