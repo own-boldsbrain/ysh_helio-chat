@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { 
   ArrowLeft, List, Lightning, MapPin, Calendar, TrendUp,
-  Plug, SolarPanel, ChartBar, Tree, CurrencyCircleDollar, FileText,
+  SolarPanel, ChartBar, Tree, CurrencyCircleDollar, FileText,
   Download, Share, Check, Warning, Cube
 } from "@phosphor-icons/react"
 import { Button } from "@/components/ui/button"
@@ -11,6 +11,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { toast } from "sonner"
+import type { ReactNode } from "react"
 import { useEffect, useRef, useState } from "react"
 
 interface ProjectDetailPageProps {
@@ -22,7 +23,7 @@ interface ProjectDetailPageProps {
 interface ProjectSpec {
   label: string
   value: string
-  icon?: React.ReactNode
+  icon?: ReactNode
   highlight?: boolean
 }
 
@@ -37,9 +38,55 @@ interface Equipment {
 
 type ViewAngle = 'top' | 'oblique' | 'street'
 
+interface MapInstance {
+  on: (event: 'load', handler: () => void) => void
+  addSource: (id: string, source: unknown) => void
+  addLayer: (layer: unknown) => void
+  getLayer: (id: string) => unknown
+  setPaintProperty: (layerId: string, name: string, value: unknown) => void
+  easeTo: (options: { pitch: number; bearing: number; zoom: number; duration: number }) => void
+  remove: () => void
+}
+
+interface MapConstructor {
+  new (options: {
+    container: HTMLDivElement
+    style: string
+    center: [number, number]
+    zoom: number
+    pitch: number
+    bearing: number
+    antialias: boolean
+  }): MapInstance
+}
+
+interface SolarPanelFeature {
+  type: 'Feature'
+  geometry: {
+    type: 'Polygon'
+    coordinates: number[][][]
+  }
+  properties: {
+    id: number
+  }
+}
+
+interface SolarPanelFeatureCollection {
+  type: 'FeatureCollection'
+  features: SolarPanelFeature[]
+}
+
+declare global {
+  interface Window {
+    maplibregl?: {
+      Map: MapConstructor
+    }
+  }
+}
+
 export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: ProjectDetailPageProps) {
   const mapContainerRef = useRef<HTMLDivElement>(null)
-  const mapRef = useRef<any>(null)
+  const mapRef = useRef<MapInstance | null>(null)
   const [selectedAngle, setSelectedAngle] = useState<ViewAngle>('oblique')
   
   const project = {
@@ -50,7 +97,6 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
     location: 'São Paulo, SP - Jardim Paulista',
     client: 'João Silva',
     installDate: '15/03/2024',
-    color: 'oklch(0.60 0.18 270)',
     
     // Especificações Principais
     systemPower: '8.8 kWp',
@@ -236,13 +282,13 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
   useEffect(() => {
     if (!mapContainerRef.current) return
 
-    const maplibregl = (window as any).maplibregl
+    const maplibregl = window.maplibregl
     if (!maplibregl) return
 
     const initialCenter: [number, number] = [-46.6653, -23.5505]
     const initialZoom = 19
-    const initialPitch = selectedAngle === 'top' ? 0 : selectedAngle === 'oblique' ? 60 : 75
-    const initialBearing = selectedAngle === 'street' ? 45 : 30
+    const initialPitch = 60
+    const initialBearing = 30
 
     mapRef.current = new maplibregl.Map({
       container: mapContainerRef.current,
@@ -293,7 +339,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
         }
       })
 
-      const panelData: any = {
+      const panelData: SolarPanelFeatureCollection = {
         type: 'FeatureCollection',
         features: []
       }
@@ -415,8 +461,11 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <button
+                  type="button"
                   onClick={onToggleSidebar}
-                  className="w-10 h-10 rounded-xl hover:bg-accent/10 flex items-center justify-center transition-colors flex-shrink-0"
+                  aria-label="Abrir menu lateral"
+                  title="Abrir menu lateral"
+                  className="w-10 h-10 rounded-xl hover:bg-accent/10 flex items-center justify-center transition-colors shrink-0"
                 >
                   <List size={22} weight="bold" />
                 </button>
@@ -444,8 +493,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
 
             <div className="flex flex-col sm:flex-row items-start gap-4">
               <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-xl flex-shrink-0"
-                style={{ backgroundColor: project.color }}
+                className="w-16 h-16 rounded-2xl flex items-center justify-center bg-[oklch(0.60_0.18_270)] text-white font-bold text-2xl shadow-xl shrink-0"
               >
                 {project.name.charAt(0).toUpperCase()}
               </div>
@@ -486,7 +534,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {specs.map((spec, index) => (
               <motion.div
-                key={index}
+                key={spec.label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
@@ -643,7 +691,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
                     <Separator />
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Economia Mensal:</span>
-                      <span className="font-semibold text-green-600">{project.monthlySavings}</span>
+                      <span className="font-semibold text-success">{project.monthlySavings}</span>
                     </div>
                     <Separator />
                     <div className="flex justify-between">
@@ -666,12 +714,12 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
                 {/* Impacto Ambiental */}
                 <Card className="p-6">
                   <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                    <Tree size={22} weight="fill" className="text-green-600" />
+                    <Tree size={22} weight="fill" className="text-success" />
                     Impacto Ambiental
                   </h3>
                   <div className="space-y-4">
-                    <div className="bg-green-50 dark:bg-green-950/20 rounded-xl p-4">
-                      <div className="text-3xl font-bold text-green-600 mb-1">
+                    <div className="bg-success/10 rounded-xl p-4">
+                      <div className="text-3xl font-bold text-success mb-1">
                         {project.co2Offset}
                       </div>
                       <div className="text-sm text-muted-foreground">
@@ -679,7 +727,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <Tree size={32} weight="fill" className="text-green-600" />
+                      <Tree size={32} weight="fill" className="text-success" />
                       <div>
                         <div className="font-semibold">Equivalente a {project.treesEquivalent}</div>
                         <div className="text-sm text-muted-foreground">árvores plantadas</div>
@@ -729,7 +777,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
               <div className="grid grid-cols-1 gap-6">
                 {project.equipment.map((item, index) => (
                   <motion.div
-                    key={index}
+                    key={`${item.category}-${item.model}`}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
@@ -756,9 +804,9 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
                       </div>
                       <Separator className="my-4" />
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {item.specs.map((spec, specIndex) => (
-                          <div key={specIndex} className="flex items-center gap-2 text-sm">
-                            <Check size={16} weight="bold" className="text-green-600 flex-shrink-0" />
+                        {item.specs.map((spec) => (
+                          <div key={`${item.model}-${spec}`} className="flex items-center gap-2 text-sm">
+                            <Check size={16} weight="bold" className="text-success shrink-0" />
                             <span>{spec}</span>
                           </div>
                         ))}
@@ -897,7 +945,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
             <TabsContent value="documents" className="space-y-4 mt-6">
               {project.documents.map((doc, index) => (
                 <motion.div
-                  key={index}
+                  key={`${doc.name}-${doc.date}`}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
@@ -932,7 +980,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
                           )}
                           {doc.status}
                         </Badge>
-                        <Button variant="ghost" size="sm">
+                        <Button variant="ghost" size="sm" aria-label={`Baixar ${doc.name}`}>
                           <Download size={18} weight="bold" />
                         </Button>
                       </div>
@@ -948,7 +996,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
                 <div className="space-y-6">
                   {project.timeline.map((item, index) => (
                     <motion.div
-                      key={index}
+                      key={`${item.date}-${item.title}`}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
@@ -958,7 +1006,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
                         <div
                           className={`w-10 h-10 rounded-full flex items-center justify-center ${
                             item.status === 'completed'
-                              ? 'bg-green-600 text-white'
+                              ? 'bg-success text-white'
                               : item.status === 'current'
                               ? 'bg-accent text-accent-foreground'
                               : 'bg-muted text-muted-foreground'
@@ -971,7 +1019,7 @@ export function ProjectDetailPage({ onToggleSidebar, projectId, onBack }: Projec
                         {index < project.timeline.length - 1 && (
                           <div
                             className={`w-0.5 h-16 ${
-                              item.status === 'completed' ? 'bg-green-600' : 'bg-border'
+                              item.status === 'completed' ? 'bg-success' : 'bg-border'
                             }`}
                           />
                         )}

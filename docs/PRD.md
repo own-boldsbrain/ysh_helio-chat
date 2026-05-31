@@ -3,14 +3,17 @@
 Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI-powered conversational interface with high-fidelity solar irradiance data, 3D environmental modeling, and photovoltaic performance simulation. The platform serves as an engineering copilot for solar integrators in Brazil, providing analysis-ready tools for site assessment, shading analysis, equipment selection, financial analysis, and regulatory compliance - all built on a foundation of open-source tools and AWS public datasets for Earth observation.
 
 **Experience Qualities**:
+
 1. **Professional** - The interface should feel like a sophisticated engineering tool that inspires confidence, combining conversational AI assistance with technical precision and data-driven insights
 2. **Intelligent** - The platform should actively guide users through complex workflows, from site assessment to regulatory compliance, leveraging AI to simplify technical decisions
 3. **Comprehensive** - Every aspect of solar project development should be addressable within the platform, from initial site analysis using satellite data to final project documentation
 
 **Complexity Level**: Complex Application (advanced functionality, multi-modal data integration)
+
   - Integrates high-fidelity solar irradiance data from CAMS and NASA POWER, processes 3D geospatial data from OpenStreetMap and IBGE DEMs, performs photovoltaic simulations using industry-standard models, provides access to AWS Earth observation datasets (Sentinel-2, CBERS-4), offers AI-powered conversational guidance for regulatory compliance and technical questions, manages multiple project workflows with state persistence, and generates engineering artifacts (reports, diagrams, specifications). Built with a hybrid architecture combining frontend React components with backend simulation capabilities, designed to scale as a "Solar Accuracy as a Service" platform.
 
 ### 3D Shading Analysis with Terrain Data
+
 - **Functionality**: Advanced shading analysis using Digital Elevation Models (DEM) and 3D urban geometry to calculate precise solar shading impacts from terrain features and buildings. Provides interactive 3D visualization with MapLibre GL showing terrain exaggeration, satellite imagery, and hillshade rendering. Analyzes far-field (terrain horizon) and near-field (building) obstructions with hourly, monthly, and annual shading metrics.
 - **Purpose**: Enables accurate solar potential assessment by quantifying shading losses from topography and urban environment, critical for ROI calculations and system sizing. Addresses Phase 2 technical architecture requirements for environmental context modeling and 3D shading analysis (hybrid approach combining DEM-based horizon profiling with building shadow projection).
 - **Trigger**: User navigates to "Análise de Sombreamento" from sidebar menu or initiates analysis from dimensioning workflow
@@ -18,6 +21,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: Map loads with 3D terrain and satellite imagery, smooth camera transitions between view modes (2D/3D pitch 60°/terrain pitch 70°), analysis completes in <5 seconds with progress feedback, displays terrain metrics (elevation, slope, aspect, solar factor), detects building obstructions with height/distance/azimuth/impact, generates 360° horizon profile visualization, calculates annual shading % with monthly/hourly breakdowns, provides contextualized recommendations based on shading level (<5% excellent, 5-10% good, 10-20% moderate, >20% significant), responsive layout adapts to mobile/desktop, integrates with existing solar analysis workflows
 
 ### Complete Solar Sizing Workflow (End-to-End)
+
 - **Functionality**: Comprehensive wizard-based workflow guiding users through complete solar system dimensioning from location input to final proposal generation. Multi-step process includes: (1) Location & solar data collection via CEP with irradiation lookup, (2) Consumption analysis with electrical phase selection, (3) System sizing with 3 scenario options (Conservative 1.14x, Balanced 1.30x, Optimized 1.45x), (4) Equipment selection with real component pricing (panels, inverters, mounting structures), (5) Financing options (cash vs. bank financing with monthly payment calculations), (6) Final results with complete technical and financial analysis, regulatory compliance notes, and next steps, (7) **PDF proposal generation** with professional formatting
 - **Purpose**: Provides turnkey solution for solar professionals and homeowners to generate complete, actionable solar proposals with accurate pricing, financing options, ROI calculations, regulatory compliance, and downloadable/shareable PDF documents in one continuous flow. Eliminates need for multiple tools and manual calculations while ensuring consistency and accuracy across all sizing scenarios
 - **Trigger**: User navigates to "Workflow Completo" from Dimensionamento section in sidebar menu or "Gerar Proposta PDF" for standalone PDF generation
@@ -25,6 +29,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: All 6 steps complete with validation at each stage, back navigation preserves entered data, progress bar shows current position, each step has clear visual design with cards and selection states, CEP lookup returns valid address and calculates realistic irradiation (5.2-6.0 kWh/m²/dia range), consumption translates to system size using 80% PR, 3 scenarios calculate correctly with proper multipliers, equipment costs aggregate accurately (panels + inverter + structure + installation + project), financing calculations show monthly payment with interest compounding, final proposal displays all data in organized sections with export capability, **PDF generates with professional formatting including client data, location, consumption, solar data, system configuration with equipment specs, financial analysis with detailed breakdown, shading analysis, financing options with net savings calculation, regulatory compliance notes (Lei 14.300/2022), next steps checklist, and proper branding**, responsive design works on mobile/tablet/desktop, smooth animations between steps (300ms), toast notifications for errors and success states, workflow data structure typed with TypeScript interfaces, integrates with existing navigation and routing system
 
 ### PDF Proposal Generator
+
 - **Functionality**: Standalone professional PDF proposal generator for solar photovoltaic systems with comprehensive technical and financial details. Includes client information section, project location with coordinates, consumption data analysis, solar irradiation data for the site, complete system configuration (panels, inverters, mounting structure), detailed financial analysis with investment breakdown (equipment, installation, project costs), monthly/annual economy estimates, payback calculation, 25-year ROI, optional financing details with bank, term, interest rate, and monthly payments, shading analysis results, regulatory compliance notes (Lei 14.300/2022), next steps checklist, and custom observations. Features professional layout with solar gradient branding, multi-page support with automatic pagination, data tables with alternating rows, color-coded sections, and complete footer with generation timestamp.
 - **Purpose**: Enables solar integrators and engineers to create professional, client-ready proposals directly from the platform without external tools. Provides standardized, branded documentation that includes all necessary technical specifications, financial analysis, and regulatory information required for solar project approval and client decision-making. Streamlines proposal workflow and ensures consistency across all projects.
 - **Trigger**: User navigates to "Gerar Proposta PDF" from Dimensionamento section in sidebar menu
@@ -32,6 +37,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: Form fields validate input types (numbers, text, selections), all sections render correctly in PDF with proper spacing and alignment, solar gradient colors (yellow-orange-red) appear in header and accents, client and location data display in organized cards with rounded corners, consumption and solar data render in clean tables with proper number formatting (Brazilian locale with comma decimal separator), system configuration shows equipment details with proper formatting (brand, model, quantities, power ratings), financial analysis displays investment breakdown and ROI metrics with currency formatting, optional shading analysis section only appears when data present, financing section calculates and displays net monthly savings with color coding (green for positive, red for negative), regulatory note appears in yellow highlighted box with proper Lei 14.300/2022 text, next steps render as numbered list, observations section handles long text with proper wrapping, multi-page support with automatic page breaks, page numbers display on every page (Page X of Y), footer shows generation timestamp and platform branding, preview opens in new browser tab, download triggers file save with sanitized filename including client name and date, PDF file size remains reasonable (<500KB for typical proposal), works on all modern browsers, mobile-responsive form layout, toast notifications for success/error states, loading states during PDF generation, TypeScript interfaces ensure type safety
 
 ### Collapsible Sidebar Navigation
+
 - **Functionality**: ChatGPT-style sidebar with navigation menu, GPT options, project management, and chat history
 - **Purpose**: Provides organized access to all app features and chat sessions, matching ChatGPT's familiar interface
 - **Trigger**: User clicks the menu icon (hamburger on mobile, toggle on desktop)
@@ -39,6 +45,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: Smooth slide animation (300ms spring), organized sections (Novo chat, Buscar, Galeria, Codex, GPTs, Projetos, Chats), chat history list with selection, mobile-responsive with backdrop overlay
 
 ### Chat Session Management
+
 - **Functionality**: Creates, saves, and manages multiple independent chat conversations
 - **Purpose**: Allows users to maintain separate conversation threads organized by topic
 - **Trigger**: User clicks "Novo chat" button or selects an existing chat from history
@@ -67,6 +74,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: Responses are clear and technical-friendly in Portuguese, explain technical jargons (kWp, PR, MPPT, etc.), request only essential data (CEP, monthly consumption, electrical phase), present 3 sizing scenarios (1.14x/1.30x/1.45x), include financial analysis (ROI/payback), offer shared generation (GC) for users without suitable roofs, include regulatory notes (Lei 14.300/2022), conclude with 2-3 clear next-step CTAs, errors are handled gracefully
 
 ### Message History
+
 - **Functionality**: Displays all messages in chronological order with clear visual distinction between user and AI
 - **Purpose**: Provides conversation context and allows users to review past exchanges
 - **Trigger**: Automatically displayed as messages are sent/received
@@ -74,6 +82,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: Messages persist between sessions, scroll behavior is smooth, alternating message styles are clear
 
 ### Message Editing
+
 - **Functionality**: Allows users to edit their sent messages and regenerate AI responses from that point
 - **Purpose**: Enables users to refine their questions or fix typos without starting a new conversation
 - **Trigger**: User hovers over their message and clicks the "Edit" button
@@ -81,6 +90,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: Edited message replaces original, conversation from that point forward is regenerated, cancel option restores original message
 
 ### Response Regeneration
+
 - **Functionality**: Regenerates the AI's last response without changing the user's message
 - **Purpose**: Allows users to get alternative responses if they're not satisfied with the first answer
 - **Trigger**: User hovers over the last AI message and clicks the "Regenerate" button
@@ -88,6 +98,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: Only available on last AI message, previous conversation history is preserved, new response replaces old one
 
 ### Prompt Library
+
 - **Functionality**: Curated collection of prompt templates organized by category with search functionality
 - **Purpose**: Helps users get started quickly with proven prompts for common tasks (coding, writing, analysis, translation, etc.)
 - **Trigger**: User clicks the Lightning icon in the header toolbar
@@ -130,6 +141,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: Previous chat preserved in history, new empty chat ready, sidebar updates with new session, toast confirmation
 
 ### ChatKit Widgets
+
 - **Functionality**: Rich interactive cards and components following ChatKit's component architecture (Card, ListView, Row, Col, Box, Button, Text, Title, Badge, Image, Divider, Icon, Progress, Form, Select, DatePicker, Markdown) that appear in chat messages. Includes product showcases, lists, forms, polls, progress trackers, stats dashboards with enhanced visual design and purposeful animations
 - **Purpose**: Provide interactive, structured content within chat conversations beyond plain text, enabling data visualization and user interaction with a premium, polished feel. Demonstrates the full range of ChatKit widget capabilities including layout containers, interactive elements, and rich media components
 - **Trigger**: User sends specific messages or selects widget examples from the demo menu
@@ -137,6 +149,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: Widgets render correctly with smooth entrance animations (300ms with stagger), are fully interactive with hover states and micro-interactions, actions are logged and displayed via toast, various widget types are demonstrated (product cards with enhanced image display and badges, polls with animated vote reveals, progress bars with staggered animations, stats with trend indicators, forms with selects and inputs), component hierarchy follows ChatKit patterns (containers > layout components > content components), state persists during interaction, Portuguese localization for all widget content
 
 ### Earth Observation Data Explorer
+
 - **Functionality**: Dedicated page displaying AWS public datasets for Earth Observation data of Brazil, including Sentinel-2 and CBERS-4 satellite imagery with S3 bucket access and SNS notification details. Forms the foundation of the platform's data acquisition strategy as outlined in Section 1 of the technical architecture.
 - **Purpose**: Provides solar energy professionals access to satellite imagery datasets for analyzing installation sites, monitoring solar farms, and environmental assessments. Complements the high-fidelity irradiance data from CAMS/NASA POWER with visual and multispectral Earth observation capabilities for site context and terrain analysis.
 - **Trigger**: User navigates to "Earth Observation" from sidebar menu (Compass icon)
@@ -144,6 +157,7 @@ Yello Solar Hub: A comprehensive solar energy analysis platform that combines AI
 - **Success criteria**: MapLibre map displays Brazil with 3D terrain and satellite imagery (matching the visualization requirements for terrain modeling), four dataset tabs (Sentinel-2, CBERS-4, and their SNS Topics), copyable ARN and CLI commands with visual feedback, STAC endpoint links to Brazil Data Cube STAC API (https://brazildatacube.dpi.inpe.br/stac/), detailed information about each satellite mission including resolution and applications for solar site assessment, gradient color coding per dataset type (blue-cyan for Sentinel, green-emerald for CBERS, purple-pink for Sentinel SNS, orange-red for CBERS SNS), responsive grid layout adapting to mobile/desktop, clear documentation of no-sign-request access pattern for public data
 
 ### Realtime Voice Conversations (OpenAI Realtime API - GA)
+
 - **Functionality**: Low-latency, multimodal voice conversations with the Hélio solar assistant using OpenAI's Realtime API (GA interface) over WebSocket. Features real-time speech-to-speech interactions with server-side Voice Activity Detection (VAD), streaming audio input/output, and live transcription display. Fully integrates the GA API updates including new event names (conversation.item.added, response.output_audio.delta, response.output_text.delta), session type specification, and updated audio configuration structure.
 - **Purpose**: Enables natural voice-based interactions for solar engineering consultations, allowing users to ask questions hands-free while working on site assessments, reviewing equipment specs, or discussing project details. Demonstrates cutting-edge conversational AI capabilities for technical domains.
 - **Trigger**: User navigates to "Realtime Voice" from sidebar menu (Microphone icon)

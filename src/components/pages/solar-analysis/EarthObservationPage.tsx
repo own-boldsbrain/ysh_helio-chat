@@ -88,7 +88,6 @@ const datasets: DatasetInfo[] = [
 ]
 
 export function EarthObservationPage({ onToggleSidebar }: EarthObservationPageProps) {
-  const [selectedDataset, setSelectedDataset] = useState<DatasetInfo>(datasets[0])
   const [copiedItem, setCopiedItem] = useState<string | null>(null)
 
   const handleCopy = (text: string, label: string) => {
@@ -111,13 +110,16 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <button
+                type="button"
                 onClick={onToggleSidebar}
-                className="w-10 h-10 rounded-xl hover:bg-accent/10 flex items-center justify-center transition-colors flex-shrink-0"
+                aria-label="Abrir menu lateral"
+                title="Abrir menu lateral"
+                className="w-10 h-10 rounded-xl hover:bg-accent/10 flex items-center justify-center transition-colors shrink-0"
               >
                 <List size={22} weight="bold" />
               </button>
               <div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-green-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                <h1 className="text-4xl font-bold bg-linear-to-r from-blue-600 via-green-600 to-purple-600 bg-clip-text text-transparent mb-2">
                   Earth Observation Data
                 </h1>
                 <p className="text-muted-foreground">
@@ -187,7 +189,6 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
                     <TabsTrigger
                       key={dataset.id}
                       value={dataset.id}
-                      onClick={() => setSelectedDataset(dataset)}
                       className="flex items-center gap-2"
                     >
                       <span className="text-lg">{dataset.icon}</span>
@@ -200,11 +201,11 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
                   <TabsContent key={dataset.id} value={dataset.id}>
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                       <div className="lg:col-span-2 space-y-6">
-                        <Card className={`border-2 bg-gradient-to-br ${dataset.color} bg-opacity-5`}>
+                        <Card className={`border-2 bg-linear-to-br ${dataset.color} bg-opacity-5`}>
                           <CardHeader>
                             <div className="flex items-start justify-between">
                               <div className="flex items-center gap-3">
-                                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${dataset.color} flex items-center justify-center text-3xl shadow-lg`}>
+                                <div className={`w-14 h-14 rounded-xl bg-linear-to-br ${dataset.color} flex items-center justify-center text-3xl shadow-lg`}>
                                   {dataset.icon}
                                 </div>
                                 <div>
@@ -222,7 +223,7 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
                           <CardContent className="space-y-4">
                             <div className="space-y-3">
                               <div className="flex items-start gap-3 p-4 bg-card rounded-lg border">
-                                <Database size={20} weight="bold" className="text-muted-foreground mt-1 flex-shrink-0" />
+                                <Database size={20} weight="bold" className="text-muted-foreground mt-1 shrink-0" />
                                 <div className="flex-1 min-w-0">
                                   <p className="text-sm font-semibold mb-1">Amazon Resource Name (ARN)</p>
                                   <code className="text-xs bg-muted px-2 py-1 rounded block break-all">
@@ -245,7 +246,7 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
                               </div>
 
                               <div className="flex items-start gap-3 p-4 bg-card rounded-lg border">
-                                <Globe size={20} weight="bold" className="text-muted-foreground mt-1 flex-shrink-0" />
+                                <Globe size={20} weight="bold" className="text-muted-foreground mt-1 shrink-0" />
                                 <div className="flex-1">
                                   <p className="text-sm font-semibold mb-1">AWS Region</p>
                                   <Badge variant="outline" className="font-mono">
@@ -256,7 +257,7 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
 
                               {dataset.cliCommand && (
                                 <div className="flex items-start gap-3 p-4 bg-card rounded-lg border">
-                                  <CloudArrowDown size={20} weight="bold" className="text-muted-foreground mt-1 flex-shrink-0" />
+                                  <CloudArrowDown size={20} weight="bold" className="text-muted-foreground mt-1 shrink-0" />
                                   <div className="flex-1 min-w-0">
                                     <p className="text-sm font-semibold mb-1">AWS CLI Access</p>
                                     <p className="text-xs text-muted-foreground mb-2">
@@ -268,7 +269,7 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
                                     <Button
                                       variant="ghost"
                                       size="sm"
-                                      onClick={() => handleCopy(dataset.cliCommand!, "Comando CLI")}
+                                      onClick={() => handleCopy(dataset.cliCommand, "Comando CLI")}
                                       className="mt-2 h-7 text-xs"
                                     >
                                       {copiedItem === "Comando CLI" ? (
@@ -284,7 +285,7 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
 
                               {dataset.stacEndpoint && (
                                 <div className="flex items-start gap-3 p-4 bg-card rounded-lg border">
-                                  <ChartBar size={20} weight="bold" className="text-muted-foreground mt-1 flex-shrink-0" />
+                                  <ChartBar size={20} weight="bold" className="text-muted-foreground mt-1 shrink-0" />
                                   <div className="flex-1 min-w-0">
                                     <p className="text-sm font-semibold mb-1">STAC Endpoint</p>
                                     <p className="text-xs text-muted-foreground mb-2">
@@ -430,7 +431,7 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
                           </CardContent>
                         </Card>
 
-                        <Card className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border-blue-500/20">
+                        <Card className="bg-linear-to-br from-blue-500/10 to-purple-500/10 border-blue-500/20">
                           <CardHeader>
                             <CardTitle className="flex items-center gap-2 text-lg">
                               <Info size={20} weight="fill" className="text-blue-600" />
@@ -450,7 +451,7 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
                               </ul>
                             </div>
                             <Button 
-                              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:opacity-90"
+                              className="w-full bg-linear-to-r from-blue-600 to-purple-600 hover:opacity-90"
                               onClick={() => window.open("https://registry.opendata.aws/bdc/", "_blank")}
                             >
                               <Globe className="mr-2" size={16} weight="bold" />
@@ -478,21 +479,21 @@ export function EarthObservationPage({ onToggleSidebar }: EarthObservationPagePr
                     Os datasets estão disponíveis gratuitamente na AWS como parte do programa Open Data Sponsorship.
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-                    <div className="p-4 bg-gradient-to-br from-blue-500/10 to-blue-500/5 rounded-lg border">
+                    <div className="p-4 bg-linear-to-br from-blue-500/10 to-blue-500/5 rounded-lg border">
                       <div className="text-2xl mb-2">🌐</div>
                       <h4 className="font-semibold mb-1">Acesso Global</h4>
                       <p className="text-xs text-muted-foreground">
                         Dados acessíveis de qualquer lugar do mundo sem custos
                       </p>
                     </div>
-                    <div className="p-4 bg-gradient-to-br from-green-500/10 to-green-500/5 rounded-lg border">
+                    <div className="p-4 bg-success/10 rounded-lg border border-success/20">
                       <div className="text-2xl mb-2">📊</div>
                       <h4 className="font-semibold mb-1">Analysis Ready</h4>
                       <p className="text-xs text-muted-foreground">
                         Dados pré-processados e prontos para uso imediato
                       </p>
                     </div>
-                    <div className="p-4 bg-gradient-to-br from-purple-500/10 to-purple-500/5 rounded-lg border">
+                    <div className="p-4 bg-linear-to-br from-purple-500/10 to-purple-500/5 rounded-lg border">
                       <div className="text-2xl mb-2">🔄</div>
                       <h4 className="font-semibold mb-1">Atualizações Regulares</h4>
                       <p className="text-xs text-muted-foreground">

@@ -205,11 +205,13 @@ setAuthUser(normalizedUser)
 ### 3.3 Completude Geral: **70%** 🟢
 
 **Pontos Fortes**:
+
 - ✅ OAuth moderno e funcional
 - ✅ Validação de campos (CPF, email, senha 8+ chars)
 - ✅ UX limpa com tabs (Login/Registro)
 
 **Gaps Não-Críticos**:
+
 1. Persistência em `useKV` (GitHub Spark) sem backend próprio
 2. LGPD compliance superficial
 3. Google OAuth parcial (falta server-side)

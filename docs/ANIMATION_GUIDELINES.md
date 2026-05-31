@@ -3,18 +3,21 @@
 ## Core Principles
 
 ### 1. Performance First (60fps Target)
+
 - **MUST**: Use compositor-only properties (`transform`, `opacity`)
 - **NEVER**: Animate `top`, `left`, `width`, `height`, `margin`, `padding` (causes layout/paint)
 - **ALWAYS**: Add `will-change` hints for animated properties
 - **REMOVE**: `will-change` after animation completes (or use sparingly)
 
 ### 2. Accessibility (prefers-reduced-motion)
+
 - **MUST**: Honor `prefers-reduced-motion: reduce` media query
 - **MUST**: Use `usePrefersReducedMotion` hook in React components
 - **SHOULD**: Provide reduced motion variants (instant state changes)
 - **CONSIDER**: Backend header `Sec-CH-Prefers-Reduced-Motion` for server-side optimization
 
 ### 3. Animation Hierarchy (Prefer CSS → Web Animations API → JS Libraries)
+
 1. **CSS animations/transitions** - Most performant, declarative
 2. **Web Animations API** - When you need programmatic control
 3. **Framer Motion** - Complex orchestration, spring physics
@@ -22,6 +25,7 @@
 ## Implementation Patterns
 
 ### CSS-Based Animations (Preferred)
+
 ```css
 /* Good: Uses transform and opacity */
 .button-hover {
@@ -46,6 +50,7 @@
 ```
 
 ### Framer Motion with Reduced Motion
+
 ```tsx
 import { motion } from "framer-motion"
 import { usePrefersReducedMotion } from "@/hooks/use-reduced-motion"
@@ -67,6 +72,7 @@ function Component() {
 ```
 
 ### Conditional Interactions
+
 ```tsx
 <motion.button
   whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
@@ -80,12 +86,14 @@ function Component() {
 ## Animation Timing
 
 ### Duration Guidelines
+
 - **Micro-interactions**: 100-150ms (hover, focus)
 - **State changes**: 200-300ms (modal open, tab switch)
 - **Page transitions**: 300-500ms (route changes, large UI shifts)
 - **Attention-directing**: 200-400ms (tooltips, notifications)
 
 ### Easing Functions
+
 - **Ease-out**: Default for most UI (elements entering screen)
 - **Ease-in**: Elements leaving screen
 - **Ease-in-out**: Symmetrical motion (modals, overlays)
@@ -94,6 +102,7 @@ function Component() {
 ## Transform Origin
 
 Always set appropriate `transform-origin`:
+
 ```css
 /* Scale from center (default) */
 transform-origin: center;
@@ -124,6 +133,7 @@ transform-origin: bottom center;
 ## Common Patterns
 
 ### Fade In on Mount
+
 ```tsx
 <motion.div
   initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
@@ -135,6 +145,7 @@ transform-origin: bottom center;
 ```
 
 ### Staggered List Animation
+
 ```tsx
 const container = {
   hidden: { opacity: 0 },
@@ -161,6 +172,7 @@ const item = {
 ```
 
 ### Button Hover/Tap
+
 ```tsx
 <motion.button
   whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
@@ -173,6 +185,7 @@ const item = {
 ```
 
 ### Loading Spinner
+
 ```tsx
 <motion.div
   animate={prefersReducedMotion ? {} : { rotate: 360 }}
@@ -190,6 +203,7 @@ const item = {
 ## Interruptible Animations
 
 Use spring physics for interruptible feel:
+
 ```tsx
 // Good: Spring can be interrupted mid-animation
 <motion.div
@@ -207,11 +221,13 @@ Use spring physics for interruptible feel:
 ## Testing Reduced Motion
 
 ### Browser DevTools
+
 1. Chrome: DevTools → Rendering → Emulate CSS media feature `prefers-reduced-motion`
 2. Firefox: about:config → `ui.prefersReducedMotion` = 1
 3. Safari: Develop → Experimental Features → Prefers Reduced Motion
 
 ### Manual Testing
+
 ```tsx
 // Force reduced motion for testing
 const usePrefersReducedMotion = () => true

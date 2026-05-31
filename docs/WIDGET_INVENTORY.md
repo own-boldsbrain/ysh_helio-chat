@@ -11,6 +11,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 ## 🏗️ Widget Categories
 
 ### Solar Energy Widgets (10)
+
 1. Solar Location Search Widget
 2. Roof Drawing Widget
 3. Solar Analysis Results Widget
@@ -23,19 +24,21 @@ Primary Focus: Solar Energy Solutions (10/17)
 10. Solar Location Search Widget
 
 ### General Purpose Widgets (7)
-11. Product Widget
-12. Poll Widget
-13. Progress Widget
-14. Stats Widget
-15. Card Widget
-16. List Widget
-17. Form Widget
+
+1. Product Widget
+2. Poll Widget
+3. Progress Widget
+4. Stats Widget
+5. Card Widget
+6. List Widget
+7. Form Widget
 
 ---
 
 ## 📋 Detailed Widget Inventory
 
 ### 1. Solar Location Search Widget
+
 - **Type**: `solar-location-search`
 - **Purpose**: Allows users to search for and select a location for solar analysis
 - **Data Structure**: 
@@ -44,6 +47,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "dimensionamento", "dimensionar", "localização", "endereço"
 
 ### 2. Roof Drawing Widget
+
 - **Type**: `roof-drawing`
 - **Purpose**: Enables users to draw or outline roof areas for solar panel placement
 - **Data Structure**:
@@ -52,6 +56,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "telhado", "desenhar", "área"
 
 ### 3. Solar Analysis Results Widget
+
 - **Type**: `solar-analysis-results`
 - **Purpose**: Displays comprehensive solar analysis results including irradiation, system recommendations, and financial projections
 - **Data Structure**:
@@ -66,6 +71,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "resultados", "análise completa", "relatório"
 
 ### 4. Utility Analysis Widget
+
 - **Type**: `utility-analysis`
 - **Purpose**: Analyzes energy bills and consumption patterns
 - **Data Structure**:
@@ -80,7 +86,9 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "analise", "fatura", "energia", "consumo"
 
 ### 5. Solar Kit Widget
+
 - **Type**: `solar-kit`
+
 - **Purpose**: Displays solar equipment kits with components and specifications
 - **Data Structure**:
   - `title`, `subtitle` - Kit information
@@ -92,6 +100,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "kit", "kit solar", "escolher"
 
 ### 6. Financing Calculation Widget
+
 - **Type**: `financing-calc`
 - **Purpose**: Provides financing options and payment calculations for solar projects
 - **Data Structure**:
@@ -103,6 +112,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "financiamento", "crédito", "simular"
 
 ### 7. Solar Equipment Widget
+
 - **Type**: `solar-equipment`
 - **Purpose**: Displays and allows selection of individual solar equipment components
 - **Data Structure**:
@@ -113,6 +123,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: None specified in demo messages
 
 ### 8. Solar Irradiation Widget
+
 - **Type**: `solar-irradiation`
 - **Purpose**: Visualizes solar irradiation data for selected locations
 - **Data Structure**:
@@ -121,6 +132,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: None specified in demo messages
 
 ### 9. Solar Sizing Widget
+
 - **Type**: `solar-sizing`
 - **Purpose**: Helps users determine appropriate solar system size based on consumption
 - **Data Structure**:
@@ -131,6 +143,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: None specified in demo messages
 
 ### 10. Solar Location Search Widget
+
 - **Type**: `solar-location-search`
 - **Purpose**: Allows location-based solar potential assessment
 - **Data Structure**: Not fully visible in widgetExamples.ts
@@ -138,6 +151,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: Not defined in demo messages
 
 ### 11. Product Widget
+
 - **Type**: `product`
 - **Purpose**: Displays product information with images, pricing, and features
 - **Data Structure**:
@@ -151,6 +165,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "show product"
 
 ### 12. Poll Widget
+
 - **Type**: `poll`
 - **Purpose**: Interactive polling functionality
 - **Data Structure**:
@@ -162,6 +177,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "show poll"
 
 ### 13. Progress Widget
+
 - **Type**: `progress`
 - **Purpose**: Visualizes progress of projects or tasks
 - **Data Structure**:
@@ -173,6 +189,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "show progress"
 
 ### 14. Stats Widget
+
 - **Type**: `stats`
 - **Purpose**: Displays statistical data with visual indicators
 - **Data Structure**:
@@ -182,6 +199,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "show stats"
 
 ### 15. Card Widget
+
 - **Type**: `card`
 - **Purpose**: General-purpose card component for displaying information
 - **Data Structure**:
@@ -193,6 +211,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "show order", "show payment"
 
 ### 16. List Widget
+
 - **Type**: `list`
 - **Purpose**: Displays items in a list format
 - **Data Structure**:
@@ -203,6 +222,7 @@ Primary Focus: Solar Energy Solutions (10/17)
 - **Trigger Keywords**: "show tasks", "show features"
 
 ### 17. Form Widget
+
 - **Type**: `form`
 - **Purpose**: Interactive form component
 - **Data Structure**:
@@ -219,6 +239,7 @@ Widgets can be activated in the chat interface through specific trigger keywords
 ## 🔧 Widget Architecture
 
 All widgets follow a consistent architecture:
+
 - Defined in the `Widget` interface with id, type, and data
 - Rendered through the `WidgetRenderer` component
 - Support interactive actions through the `WidgetAction` interface

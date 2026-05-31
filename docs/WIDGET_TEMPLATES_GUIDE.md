@@ -69,6 +69,7 @@ backend/ (your backend service)
 **Function:** `productCardWidget(data: ProductCardData)`
 
 **Data Structure:**
+
 ```typescript
 interface ProductCardData {
   productId: string
@@ -87,10 +88,12 @@ interface ProductCardData {
 ```
 
 **Generated Actions:**
+
 - `add_to_quote` - Add product to user's quote/cart
 - `view_product_details` - Open detailed product specifications page
 
 **Use Cases:**
+
 - "Mostre inversores de 5kW"
 - "Quais painéis solares você recomenda?"
 - "Preciso de um inversor híbrido"
@@ -104,6 +107,7 @@ interface ProductCardData {
 **Function:** `creditLinesWidget(creditLines: CreditLineData[])`
 
 **Data Structure:**
+
 ```typescript
 interface CreditLineData {
   id: string
@@ -121,9 +125,11 @@ interface CreditLineData {
 ```
 
 **Generated Actions:**
+
 - `simulate_financing` - Open financing simulator for selected credit line
 
 **Use Cases:**
+
 - "Quais opções de financiamento estão disponíveis?"
 - "Como financiar um sistema solar?"
 - "Preciso de crédito para energia solar"
@@ -137,6 +143,7 @@ interface CreditLineData {
 **Function:** `irradiationMapWidget(data: IrradiationMapData)`
 
 **Data Structure:**
+
 ```typescript
 interface IrradiationMapData {
   location: {
@@ -165,10 +172,12 @@ interface IrradiationMapData {
 ```
 
 **Generated Actions:**
+
 - `start_site_analysis` - Initiate complete site analysis with 3D shading
 - `export_irradiation_data` - Download irradiation data as CSV/JSON
 
 **Use Cases:**
+
 - "Qual a irradiação solar em Belo Horizonte?"
 - "Quanto sol tem em minha cidade?"
 - "Consultar dados de irradiação"
@@ -222,7 +231,7 @@ async def handle_chatkit_message(request: Request):
 
 You have two options:
 
-**Option A: Call TypeScript functions from Python (Recommended)**
+#### Option A: Call TypeScript functions from Python (Recommended)
 
 Use a bridge like `pyexecjs` or a subprocess to call the TypeScript functions:
 
