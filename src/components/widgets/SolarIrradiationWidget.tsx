@@ -25,8 +25,8 @@ export function SolarIrradiationWidget({ data }: SolarIrradiationWidgetProps) {
   const getQualityColor = (quality: string) => {
     switch (quality) {
       case 'excellent': return 'text-[#00D98C]'
-      case 'good': return 'text-[#FFD60A]'
-      default: return 'text-[#FF8800]'
+      case 'good': return 'text-[hsl(var(--solar-yellow))]'
+      default: return 'text-[hsl(var(--solar-orange))]'
     }
   }
 
@@ -44,7 +44,7 @@ export function SolarIrradiationWidget({ data }: SolarIrradiationWidgetProps) {
     <Card className="p-6 border-2">
       <div className="space-y-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFD60A] to-[#FF8800] flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(var(--solar-yellow))] to-[hsl(var(--solar-orange))] flex items-center justify-center shadow-lg">
             <Sun size={24} weight="bold" className="text-white" />
           </div>
           <div>
@@ -55,7 +55,7 @@ export function SolarIrradiationWidget({ data }: SolarIrradiationWidgetProps) {
 
         <div className="space-y-3">
           <div className="flex items-center gap-2 px-3 py-2 bg-muted/50 rounded-lg">
-            <MapPin size={18} weight="fill" className="text-[#FF3D3D]" />
+            <MapPin size={18} weight="fill" className="text-[hsl(var(--solar-red))]" />
             <div className="flex-1">
               <span className="text-sm font-semibold">{data.location}</span>
               <div className="text-xs text-muted-foreground">
@@ -73,18 +73,18 @@ export function SolarIrradiationWidget({ data }: SolarIrradiationWidgetProps) {
             transition={{ delay: 0.1 }}
             className="grid grid-cols-3 gap-3"
           >
-            <div className="p-4 bg-gradient-to-br from-[#FFD60A]/20 to-[#FF8800]/20 rounded-xl border border-[#FFD60A]/40">
+            <div className="p-4 bg-gradient-to-br from-[hsl(var(--solar-yellow))]/20 to-[hsl(var(--solar-orange))]/20 rounded-xl border border-[hsl(var(--solar-yellow))]/40">
               <div className="flex items-center gap-2 mb-2">
-                <Sun size={20} weight="fill" className="text-[#FFD60A]" />
+                <Sun size={20} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
                 <span className="text-xs text-muted-foreground uppercase tracking-wide">GHI</span>
               </div>
               <div className="text-2xl font-bold text-foreground mb-1">{data.ghi.toFixed(1)}</div>
               <div className="text-xs text-muted-foreground">kWh/m²/dia</div>
             </div>
 
-            <div className="p-4 bg-gradient-to-br from-[#FF8800]/20 to-[#FF3D3D]/20 rounded-xl border border-[#FF8800]/40">
+            <div className="p-4 bg-gradient-to-br from-[hsl(var(--solar-orange))]/20 to-[hsl(var(--solar-red))]/20 rounded-xl border border-[hsl(var(--solar-orange))]/40">
               <div className="flex items-center gap-2 mb-2">
-                <Lightning size={20} weight="fill" className="text-[#FF3D3D]" />
+                <Lightning size={20} weight="fill" className="text-[hsl(var(--solar-red))]" />
                 <span className="text-xs text-muted-foreground uppercase tracking-wide">DNI</span>
               </div>
               <div className="text-2xl font-bold text-foreground mb-1">{data.dni.toFixed(1)}</div>
@@ -124,7 +124,7 @@ export function SolarIrradiationWidget({ data }: SolarIrradiationWidgetProps) {
                   ease: "easeInOut"
                 }}
               >
-                <Sun size={48} weight="duotone" className="text-[#FFD60A]" />
+                <Sun size={48} weight="duotone" className="text-[hsl(var(--solar-yellow))]" />
               </motion.div>
             </div>
 
@@ -164,7 +164,7 @@ export function SolarIrradiationWidget({ data }: SolarIrradiationWidgetProps) {
           >
             <div className="space-y-2 text-xs text-muted-foreground">
               <div className="flex items-start gap-2">
-                <Lightning size={14} weight="fill" className="text-[#FFD60A] mt-0.5 flex-shrink-0" />
+                <Lightning size={14} weight="fill" className="text-[hsl(var(--solar-yellow))] mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-foreground mb-1">Sobre os dados:</p>
                   <ul className="space-y-1 list-disc list-inside">

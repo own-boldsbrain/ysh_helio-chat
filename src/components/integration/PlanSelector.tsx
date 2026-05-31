@@ -53,7 +53,7 @@ export function PlanSelector({ plans, currentPlanId, onSelectPlan, className = "
             >
               {plan.badge && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <Badge className="bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D] text-white px-4 py-1">
+                  <Badge className="bg-gradient-solar-r text-foreground px-4 py-1">
                     {plan.badge}
                   </Badge>
                 </div>
@@ -111,7 +111,7 @@ export function PlanSelector({ plans, currentPlanId, onSelectPlan, className = "
                     variant={plan.highlighted ? "default" : "outline"}
                     className={`
                       w-full
-                      ${plan.highlighted ? 'bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D] hover:opacity-90' : ''}
+                      ${plan.highlighted ? 'bg-gradient-solar-r hover:opacity-90' : ''}
                     `}
                   >
                     {plan.price === 0 ? 'Começar Grátis' : 'Selecionar Plano'}

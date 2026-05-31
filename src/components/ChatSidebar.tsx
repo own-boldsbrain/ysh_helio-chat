@@ -183,7 +183,7 @@ function SizingSection({
                   currentRoute === 'solar-workflow' && "bg-sidebar-accent"
                 )}
               >
-                <Sparkle size={15} weight="fill" className="mr-3 flex-shrink-0 text-[#FFD60A]" />
+                <Sparkle size={15} weight="fill" className="mr-3 flex-shrink-0 text-[hsl(var(--solar-yellow))]" />
                 <span className="truncate">Workflow Completo</span>
               </Button>
             </motion.div>
@@ -550,8 +550,8 @@ export function ChatSidebar({
                               currentRoute === 'gpts' && "bg-sidebar-accent"
                             )}
                           >
-                            <div className="absolute left-3 w-2 h-2 rounded-full bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] animate-pulse mr-3 flex-shrink-0" />
-                            <span className="ml-5 font-semibold bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] bg-clip-text text-transparent truncate">
+                            <div className="absolute left-3 w-2 h-2 rounded-full bg-gradient-solar-r animate-pulse mr-3 flex-shrink-0" />
+                            <span className="ml-5 font-semibold bg-gradient-solar-r bg-clip-text text-transparent truncate">
                               Hélio - Copiloto Solar
                             </span>
                           </Button>

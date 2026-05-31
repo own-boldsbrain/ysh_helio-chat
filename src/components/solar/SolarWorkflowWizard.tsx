@@ -113,7 +113,7 @@ export function SolarWorkflowWizard({ onComplete, onCancel }: SolarWorkflowWizar
       <Card className="p-6 space-y-6">
         <div>
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-solar-br flex items-center justify-center">
               <Sparkle size={24} weight="fill" className="text-white" />
             </div>
             <div>

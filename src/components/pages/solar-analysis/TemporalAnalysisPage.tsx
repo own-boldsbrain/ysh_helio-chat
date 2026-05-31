@@ -543,7 +543,7 @@ Limite a 4 parágrafos curtos.`
             <List size={22} weight="bold" />
           </Button>
           <div>
-            <h1 className="text-lg font-bold bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] bg-clip-text text-transparent">
+            <h1 className="text-lg font-bold bg-gradient-solar-r bg-clip-text text-transparent">
               Análise Temporal de Satélite
             </h1>
             <p className="text-xs text-muted-foreground">
@@ -763,7 +763,7 @@ Limite a 4 parágrafos curtos.`
                     <Button
                       onClick={handleAnalyzeChanges}
                       disabled={isAnalyzing}
-                      className="w-full bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90"
+                      className="w-full bg-gradient-solar-r hover:opacity-90"
                     >
                       {isAnalyzing ? (
                         <>
@@ -994,7 +994,7 @@ Limite a 4 parágrafos curtos.`
               </Button>
               <Button
                 size="sm"
-                className="bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 flex-1"
+                className="bg-gradient-solar-r hover:opacity-90 flex-1"
                 onClick={handleComparisonAnalysis}
               >
                 <Sparkle size={16} weight="fill" className="mr-2" />

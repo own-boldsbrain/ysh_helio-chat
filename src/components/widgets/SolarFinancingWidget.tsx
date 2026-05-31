@@ -80,8 +80,8 @@ export function SolarFinancingWidget({ projectValue, options, onSelectOption }: 
 
   const getScoreColor = (score: number) => {
     if (score >= 90) return "text-[#00D98C]"
-    if (score >= 80) return "text-[#FFD60A]"
-    return "text-[#FF8800]"
+    if (score >= 80) return "text-[hsl(var(--solar-yellow))]"
+    return "text-[hsl(var(--solar-orange))]"
   }
 
   return (
@@ -216,7 +216,7 @@ export function SolarFinancingWidget({ projectValue, options, onSelectOption }: 
 
           <div className="mt-4 p-3 bg-muted/30 rounded-lg">
             <div className="flex items-start gap-2">
-              <Lightning size={16} weight="fill" className="text-[#FFD60A] mt-0.5 flex-shrink-0" />
+              <Lightning size={16} weight="fill" className="text-[hsl(var(--solar-yellow))] mt-0.5 flex-shrink-0" />
               <p className="text-xs text-muted-foreground leading-relaxed">
                 Simulação baseada em análise de crédito pré-aprovada. Taxas e condições sujeitas a confirmação pelos bancos.
               </p>

@@ -133,7 +133,7 @@ export function SystemSizingStep({ data, onNext, onBack }: SystemSizingStepProps
                   <div>
                     <h4 className="text-lg font-bold capitalize">{scenarioKey}</h4>
                     {scenario.recommended && (
-                      <Badge className="mt-1 bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D]">
+                      <Badge className="mt-1 bg-gradient-solar-r">
                         ⭐ Recomendado
                       </Badge>
                     )}
@@ -234,7 +234,7 @@ export function SystemSizingStep({ data, onNext, onBack }: SystemSizingStepProps
         </Button>
         <Button
           onClick={handleSubmit}
-          className="flex-1 h-12 bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D] hover:opacity-90"
+          className="flex-1 h-12 bg-gradient-solar-r hover:opacity-90"
         >
           <span>Continuar</span>
           <ArrowRight size={20} className="ml-2" weight="bold" />

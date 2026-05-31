@@ -75,7 +75,7 @@ export function SolarSizingWidget({ onCalculate, initialConsumption, location }:
     <Card className="p-6 border-2">
       <div className="space-y-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFD60A] to-[#FF8800] flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[hsl(var(--solar-yellow))] to-[hsl(var(--solar-orange))] flex items-center justify-center shadow-lg">
             <Calculator size={24} weight="bold" className="text-white" />
           </div>
           <div>
@@ -86,7 +86,7 @@ export function SolarSizingWidget({ onCalculate, initialConsumption, location }:
 
         {location && (
           <div className="flex items-center gap-2 px-3 py-2 bg-muted/50 rounded-lg">
-            <MapPin size={16} weight="fill" className="text-[#FF3D3D]" />
+            <MapPin size={16} weight="fill" className="text-[hsl(var(--solar-red))]" />
             <span className="text-sm font-medium">{location}</span>
           </div>
         )}
@@ -102,7 +102,7 @@ export function SolarSizingWidget({ onCalculate, initialConsumption, location }:
               placeholder="Ex: 450"
               value={monthlyConsumption}
               onChange={(e) => setMonthlyConsumption(e.target.value)}
-              className="border-2 focus:border-[#FFD60A]"
+              className="border-2 focus:border-[hsl(var(--solar-yellow))]"
             />
           </div>
 
@@ -116,14 +116,14 @@ export function SolarSizingWidget({ onCalculate, initialConsumption, location }:
               placeholder="Ex: 50"
               value={roofArea}
               onChange={(e) => setRoofArea(e.target.value)}
-              className="border-2 focus:border-[#FFD60A]"
+              className="border-2 focus:border-[hsl(var(--solar-yellow))]"
             />
           </div>
 
           <Button
             onClick={calculateSystem}
             disabled={!monthlyConsumption || !roofArea || isCalculating}
-            className="w-full bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 text-white font-semibold h-12"
+            className="w-full bg-gradient-solar-r hover:opacity-90 text-foreground font-semibold h-12"
           >
             {isCalculating ? (
               <motion.div
@@ -149,7 +149,7 @@ export function SolarSizingWidget({ onCalculate, initialConsumption, location }:
             className="space-y-4 pt-4 border-t-2 border-border"
           >
             <div className="flex items-center gap-2 mb-3">
-              <Sun size={20} weight="fill" className="text-[#FFD60A]" />
+              <Sun size={20} weight="fill" className="text-[hsl(var(--solar-yellow))]" />
               <h4 className="font-bold text-base">Resultado do Dimensionamento</h4>
             </div>
 
@@ -237,7 +237,7 @@ export function SolarSizingWidget({ onCalculate, initialConsumption, location }:
               </div>
             </motion.div>
 
-            <Badge variant="outline" className="w-full justify-center py-2 border-[#FFD60A] text-[#FF8800]">
+            <Badge variant="outline" className="w-full justify-center py-2 border-[hsl(var(--solar-yellow))] text-[hsl(var(--solar-orange))]">
               <Lightning size={16} weight="fill" className="mr-1" />
               Sistema calculado com irradiação média de 5.2 kWh/m²/dia
             </Badge>

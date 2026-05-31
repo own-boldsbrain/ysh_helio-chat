@@ -30,7 +30,7 @@ export function RealtimeVoicePage({ onToggleSidebar }: RealtimeVoicePageProps) {
             <List size={22} weight="bold" />
           </button>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] flex items-center justify-center shadow-md">
+            <div className="w-10 h-10 rounded-xl bg-gradient-solar-br flex items-center justify-center shadow-md">
               <Microphone size={20} weight="fill" className="text-white" />
             </div>
             <div>
@@ -52,7 +52,7 @@ export function RealtimeVoicePage({ onToggleSidebar }: RealtimeVoicePageProps) {
           >
             <Card className="p-6 border-2 shadow-lg bg-gradient-to-br from-background to-muted/20">
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] flex items-center justify-center shadow-lg flex-shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-gradient-solar-br flex items-center justify-center shadow-lg flex-shrink-0">
                   <Info size={24} weight="bold" className="text-white" />
                 </div>
                 <div className="space-y-2">

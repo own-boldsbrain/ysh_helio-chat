@@ -622,7 +622,7 @@ export function CheckoutPage({ onToggleSidebar }: CheckoutPageProps) {
                   </div>
 
                   <Button
-                    className="w-full bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90 text-white"
+                    className="w-full bg-gradient-solar-br hover:opacity-90 text-foreground"
                     onClick={handleFinishOrder}
                     disabled={isProcessing || (cartItems || []).length === 0}
                   >

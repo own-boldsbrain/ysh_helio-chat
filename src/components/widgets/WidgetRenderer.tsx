@@ -770,7 +770,7 @@ function UtilityAnalysisWidget({ data, onAction }: { data: any; onAction?: (acti
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <motion.div 
-                className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] flex items-center justify-center shadow-lg"
+                className="w-12 h-12 rounded-xl bg-gradient-solar-br flex items-center justify-center shadow-lg"
                 whileHover={{ scale: 1.08, rotate: 8 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -958,10 +958,10 @@ function SolarKitWidget({ data, onAction }: { data: any; onAction?: (action: Wid
       exit="exit"
     >
       <Card className="max-w-2xl border-2 shadow-xl overflow-hidden bg-card">
-        <div className="bg-gradient-to-br from-[#FFD60A]/20 via-[#FF3D3D]/10 to-[#FF0066]/20 p-6 border-b border-border/40">
+        <div className="bg-gradient-to-br from-[hsl(var(--solar-yellow))]/20 via-[hsl(var(--solar-red))]/10 to-[hsl(var(--solar-pink))]/20 p-6 border-b border-border/40">
           <div className="flex items-center gap-3 mb-4">
             <motion.div 
-              className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] flex items-center justify-center shadow-lg"
+              className="w-14 h-14 rounded-xl bg-gradient-solar-br flex items-center justify-center shadow-lg"
               whileHover={{ scale: 1.08, rotate: 8 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
@@ -1026,7 +1026,7 @@ function SolarKitWidget({ data, onAction }: { data: any; onAction?: (action: Wid
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground font-medium">Investimento Total</p>
-                <p className="text-3xl font-bold bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] bg-clip-text text-transparent">
+                <p className="text-3xl font-bold bg-gradient-solar-r bg-clip-text text-transparent">
                   {data.price}
                 </p>
               </div>
@@ -1064,7 +1064,7 @@ function SolarKitWidget({ data, onAction }: { data: any; onAction?: (action: Wid
                     variant={action.variant || "default"}
                     size="lg"
                     onClick={() => onAction?.({ type: action.type, payload: action.payload })}
-                    className={`${idx === 0 ? 'w-full bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] hover:opacity-90' : 'w-full'} shadow-md font-semibold`}
+                    className={`${idx === 0 ? 'w-full bg-gradient-solar-r hover:opacity-90' : 'w-full'} shadow-md font-semibold`}
                   >
                     {action.label}
                   </Button>

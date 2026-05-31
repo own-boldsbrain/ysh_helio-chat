@@ -10,6 +10,7 @@ import { Sun, CloudRain, Mountains, Buildings, Cube, Calculator, Download, Play,
 import { motion } from "framer-motion"
 import { getBDCTileLayer, getAvailableImagery, type STACItem } from "@/lib/bdc-stac"
 import { toast } from "sonner"
+import { MAP_COLORS } from "@/lib/solar-colors"
 
 interface TerrainData {
   elevation: number
@@ -202,7 +203,7 @@ export function ShadingAnalysis3D({ location, roofPolygon, onAnalysisComplete }:
                 type: "fill",
                 source: "roof-polygon",
                 paint: {
-                  "fill-color": "#FFD60A",
+                  "fill-color": MAP_COLORS.polygon,
                   "fill-opacity": 0.4,
                 },
               })
@@ -212,7 +213,7 @@ export function ShadingAnalysis3D({ location, roofPolygon, onAnalysisComplete }:
                 type: "line",
                 source: "roof-polygon",
                 paint: {
-                  "line-color": "#FF3D3D",
+                  "line-color": MAP_COLORS.horizonStroke,
                   "line-width": 3,
                 },
               })
@@ -220,7 +221,7 @@ export function ShadingAnalysis3D({ location, roofPolygon, onAnalysisComplete }:
           })
         }
 
-        new window.maplibregl.Marker({ color: "#FF0066" })
+        new window.maplibregl.Marker({ color: MAP_COLORS.horizonStroke })
           .setLngLat([location.lon, location.lat])
           .addTo(map.current)
 
@@ -716,14 +717,14 @@ export function ShadingAnalysis3D({ location, roofPolygon, onAnalysisComplete }:
 
                 <div>
                   <h3 className="font-semibold mb-3">Perfil de Horizonte (360°)</h3>
-                  <div className="h-[200px] bg-gradient-to-b from-sky-100 to-ground-100 rounded-xl border-2 p-4 relative overflow-hidden">
+                  <div className="h-[200px] bg-gradient-to-b from-sky-100 dark:from-sky-950 to-amber-100 dark:to-amber-950 rounded-xl border-2 p-4 relative overflow-hidden">
                     <svg width="100%" height="100%" viewBox="0 0 360 100" preserveAspectRatio="none">
                       <polyline
                         points={analysisResult.horizonProfile
                           .map((p) => `${p.azimuth},${100 - p.elevation * 5}`)
                           .join(" ")}
                         fill="none"
-                        stroke="#FF3D3D"
+                        stroke={MAP_COLORS.horizonStroke}
                         strokeWidth="2"
                       />
                       <polyline
@@ -735,8 +736,8 @@ export function ShadingAnalysis3D({ location, roofPolygon, onAnalysisComplete }:
                       />
                       <defs>
                         <linearGradient id="horizon-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor="#8B4513" stopOpacity="0.8" />
-                          <stop offset="100%" stopColor="#8B4513" stopOpacity="0.3" />
+                          <stop offset="0%" stopColor={MAP_COLORS.horizonFill} stopOpacity="0.8" />
+                          <stop offset="100%" stopColor={MAP_COLORS.horizonFill} stopOpacity="0.3" />
                         </linearGradient>
                       </defs>
                     </svg>

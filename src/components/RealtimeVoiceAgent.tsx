@@ -204,7 +204,7 @@ export function RealtimeVoiceAgent({
                 : { scale: 1, rotate: 0 }
             }
             transition={{ duration: 2, repeat: isSpeaking ? Infinity : 0 }}
-            className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] flex items-center justify-center shadow-lg"
+            className="w-12 h-12 rounded-xl bg-gradient-solar-br flex items-center justify-center shadow-lg"
           >
             <SpeakerHigh size={24} weight="fill" className="text-white" />
           </motion.div>
@@ -242,7 +242,7 @@ export function RealtimeVoiceAgent({
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
               onClick={connect}
-              className="bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] shadow-lg"
+              className="bg-gradient-solar-br shadow-lg"
             >
               <ChatCircle className="mr-2" size={20} weight="bold" />
               Conectar

@@ -66,7 +66,7 @@ export function ConsumptionStep({ data, onNext, onBack }: ConsumptionStepProps) 
               <Lightning
                 size={20}
                 weight="fill"
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-[#FFD60A]"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-[hsl(var(--solar-yellow))]"
               />
               <Input
                 id="consumption"
@@ -156,7 +156,7 @@ export function ConsumptionStep({ data, onNext, onBack }: ConsumptionStepProps) 
         <Button
           onClick={handleSubmit}
           disabled={!monthlyKWh || Number(monthlyKWh) < 50}
-          className="flex-1 h-12 bg-gradient-to-r from-[#FFD60A] to-[#FF3D3D] hover:opacity-90"
+          className="flex-1 h-12 bg-gradient-solar-r hover:opacity-90"
         >
           <span>Continuar</span>
           <ArrowRight size={20} className="ml-2" weight="bold" />

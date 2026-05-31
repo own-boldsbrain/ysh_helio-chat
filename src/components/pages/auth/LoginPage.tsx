@@ -136,7 +136,7 @@ export function LoginPage({ onToggleSidebar, onLoginSuccess }: LoginPageProps) {
             <img src={yelloIconJpg} alt="Yello Logo" className="w-full h-full object-cover" />
           </motion.div>
           <div>
-            <h1 className="text-lg font-bold bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] bg-clip-text text-transparent">
+            <h1 className="text-lg font-bold bg-gradient-solar-r bg-clip-text text-transparent">
               Acesso ao Sistema
             </h1>
             <p className="text-xs text-muted-foreground font-medium">Entre ou crie sua conta</p>
@@ -208,7 +208,7 @@ export function LoginPage({ onToggleSidebar, onLoginSuccess }: LoginPageProps) {
                 </CardContent>
                 <CardFooter className="flex-col gap-3">
                   <Button
-                    className="w-full bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066]"
+                    className="w-full bg-gradient-solar-r"
                     onClick={handleLogin}
                     disabled={isLoading}
                   >
@@ -326,7 +326,7 @@ export function LoginPage({ onToggleSidebar, onLoginSuccess }: LoginPageProps) {
                 </CardContent>
                 <CardFooter>
                   <Button
-                    className="w-full bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066]"
+                    className="w-full bg-gradient-solar-r"
                     onClick={handleRegister}
                     disabled={isLoading}
                   >

@@ -367,11 +367,11 @@ export function RoofDrawingWidget({ data, onAction }: RoofDrawingWidgetProps) {
       exit="exit"
     >
       <Card className="max-w-4xl border-2 shadow-xl overflow-hidden bg-card">
-        <div className="bg-gradient-to-br from-[#FFD60A]/20 via-[#FF3D3D]/10 to-[#FF0066]/20 p-6 border-b border-border/40">
+        <div className="bg-gradient-to-br from-[hsl(var(--solar-yellow))]/20 via-[hsl(var(--solar-red))]/10 to-[hsl(var(--solar-pink))]/20 p-6 border-b border-border/40">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <motion.div 
-                className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#FFD60A] via-[#FF3D3D] to-[#FF0066] flex items-center justify-center shadow-lg"
+                className="w-12 h-12 rounded-xl bg-gradient-solar-br flex items-center justify-center shadow-lg"
                 whileHover={{ scale: 1.08, rotate: 8 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -392,7 +392,7 @@ export function RoofDrawingWidget({ data, onAction }: RoofDrawingWidgetProps) {
                     size="sm"
                     onClick={isDrawing ? completeDrawing : handleStartDrawing}
                     disabled={isDrawing && points.length < 3}
-                    className={isDrawing ? "bg-gradient-to-r from-[#FFD60A] via-[#FF3D3D] to-[#FF0066]" : ""}
+                    className={isDrawing ? "bg-gradient-solar-r" : ""}
                   >
                     {isDrawing ? (
                       <>

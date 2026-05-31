@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Polygon, Pencil, Trash, Check } from "@phosphor-icons/react"
+import { MAP_COLORS } from "@/lib/solar-colors"
 
 interface MapLibreViewerProps {
   className?: string
@@ -145,7 +146,7 @@ export function MapLibreViewer({
           source: 'drawing-source',
           filter: ['==', ['geometry-type'], 'Polygon'],
           paint: {
-            'fill-color': '#FFD60A',
+            'fill-color': MAP_COLORS.polygon,
             'fill-opacity': 0.3
           }
         })
@@ -156,7 +157,7 @@ export function MapLibreViewer({
           source: 'drawing-source',
           filter: ['==', ['geometry-type'], 'Polygon'],
           paint: {
-            'line-color': '#FFD60A',
+            'line-color': MAP_COLORS.polygon,
             'line-width': 3
           }
         })
@@ -167,7 +168,7 @@ export function MapLibreViewer({
           source: 'drawing-source',
           filter: ['==', ['geometry-type'], 'LineString'],
           paint: {
-            'line-color': '#FF3D3D',
+            'line-color': MAP_COLORS.horizonStroke,
             'line-width': 4,
             'line-dasharray': [2, 2]
           }
@@ -180,7 +181,7 @@ export function MapLibreViewer({
           filter: ['==', ['geometry-type'], 'Point'],
           paint: {
             'circle-radius': 6,
-            'circle-color': '#FF0066',
+            'circle-color': MAP_COLORS.horizonFill,
             'circle-stroke-color': '#ffffff',
             'circle-stroke-width': 2
           }
@@ -341,7 +342,7 @@ export function MapLibreViewer({
                 size="sm"
                 variant="outline"
                 onClick={() => startDrawing('polygon')}
-                className="border-[#FFD60A] hover:bg-[#FFD60A]/10"
+                className="border-[hsl(var(--solar-yellow))] hover:bg-[hsl(var(--solar-yellow))]/10"
               >
                 <Polygon className="mr-2" size={16} weight="bold" />
                 Polígono
@@ -350,7 +351,7 @@ export function MapLibreViewer({
                 size="sm"
                 variant="outline"
                 onClick={() => startDrawing('line')}
-                className="border-[#FF3D3D] hover:bg-[#FF3D3D]/10"
+                className="border-[hsl(var(--solar-red))] hover:bg-[hsl(var(--solar-red))]/10"
               >
                 <Pencil className="mr-2" size={16} weight="bold" />
                 String
